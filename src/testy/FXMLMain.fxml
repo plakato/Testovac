@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="testy.FXMLMainController">
+   <children>
+      <Label alignment="TOP_CENTER" contentDisplay="CENTER" style="-fx-font-size: 40;" text="Testovač" textAlignment="CENTER">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </Label>
+      <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonActionStudent" style="-fx-font-size: 20;" text="Vstúp ako žiak">
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </Button>
+      <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonActionTeacher" style="-fx-font-size: 20;" text="Vstúp ako učiteľ">
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </Button>
+   </children>
+   <padding>
+      <Insets bottom="30.0" left="30.0" right="30.0" top="10.0" />
+   </padding>
+</VBox>
