@@ -6,6 +6,8 @@
 package testy.components;
 
 import java.util.ArrayList;
+import javafx.event.ActionEvent;
+import javafx.stage.Stage;
 
 /**
  *
@@ -31,4 +33,8 @@ public class Test {
     public ArrayList<Question> getQuestions() {
         return questions;
     }
+    
+     public void evaluate(Stage stage) {
+         System.out.println("Vyhodnocujem...");
+     }
 }

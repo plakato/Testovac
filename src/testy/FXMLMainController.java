@@ -27,6 +27,7 @@ import javafx.stage.Stage;
 import testy.components.Test;
 import testy.components.TestSet;
 import testy.controllers.Loader;
+import testy.controllers.TestManager;
 
 /**
  *
@@ -59,7 +60,7 @@ public class FXMLMainController implements Initializable {
             start.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    Loader.displayTest(t, stage);
+                    TestManager.displayTest(t, stage);
                 }
             });     
             HBox hbox = new HBox(start, label);

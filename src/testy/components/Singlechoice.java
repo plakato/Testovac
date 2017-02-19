@@ -6,7 +6,13 @@
 package testy.components;
 
 import java.util.List;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 /**
  *
@@ -26,6 +32,14 @@ public class Singlechoice extends Question {
 
     @Override
     public Pane getPaneOfChoices() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        VBox vbox = new VBox();
+        ToggleGroup group = new ToggleGroup();
+        for (String choice : choices) {
+            RadioButton rb = new RadioButton(choice);
+            rb.setToggleGroup(group);
+            HBox hbox = new HBox(rb);
+            vbox.getChildren().add(hbox);
+        }
+        return vbox;
     }
 }
