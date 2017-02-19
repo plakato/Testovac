@@ -23,7 +23,7 @@ public class Loader {
         answers.add("Lukáš");
         answers.add("Paťka");
         answers.add("Kačka");
-        Question q1 = new Singlechoice("Akoo sa voláš?", answers, 2);
+        Question q1 = new Singlechoice("Ako sa voláš?", answers, 2);
         ArrayList<Integer> correct = new ArrayList<>();
         correct.add(1);
         correct.add(3);
