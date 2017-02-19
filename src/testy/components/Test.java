@@ -23,4 +23,12 @@ public class Test {
     public void addQuestion(Question q) {
         questions.add(q);
     }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public ArrayList<Question> getQuestions() {
+        return questions;
+    }
 }

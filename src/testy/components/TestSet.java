@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author plaka
  */
 public class TestSet {
-    private ArrayList<Test> tests;
+    public ArrayList<Test> tests;
     
     public TestSet() {
         tests = new ArrayList<>();

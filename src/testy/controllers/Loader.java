@@ -5,6 +5,15 @@
  */
 package testy.controllers;
 import java.util.ArrayList;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import testy.components.Multichoice;
 import testy.components.Question;
 import testy.components.Singlechoice;
@@ -16,7 +25,7 @@ import testy.components.TestSet;
  * @author plaka
  */
 public class Loader {
-    public static void LoadTests() {
+    public static TestSet LoadTests() {
         TestSet tests;
 
         ArrayList<String> answers = new ArrayList<>();
@@ -37,6 +46,29 @@ public class Loader {
         tests = new TestSet();
         tests.addTest(t1);
         tests.addTest(t2);
-
+        return tests;
     }
+    
+    public static void displayTest(Test test, Stage stage) {
+        System.out.println(test.getName() + " - is displayed.");
+        TabPane tabPane = new TabPane();
+        int counter = 1;
+        for (Question q : test.getQuestions()) {
+           Label instruction = new Label(q.question);
+           Pane choices = q.getPaneOfChoices();
+           VBox vbox = new VBox(instruction, choices);
+           Tab tab = new Tab("Otázka " + Integer.toString(counter), vbox);
+          
+           tabPane.getTabs().add(tab);
+           counter++;
+        }
+        Button finish = new Button("Ukončiť test!");
+        finish.setStyle("-fx-font-size:20;");
+        VBox outerVBox = new VBox(tabPane, finish);
+        Scene scene = new Scene(outerVBox);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+   
 }

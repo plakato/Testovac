@@ -5,10 +5,13 @@
  */
 package testy.components;
 
+import javafx.scene.layout.Pane;
+
 /**
  *
  * @author plaka
  */
-public interface Question {
-  
+public abstract class Question {
+  public String question;
+  public abstract Pane getPaneOfChoices();
 }
