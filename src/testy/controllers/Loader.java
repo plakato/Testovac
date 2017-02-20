@@ -40,7 +40,7 @@ public class Loader {
         
         Test t1 = new Test("Jednootazkovy");
         t1.addQuestion(q1);
-        Test t2 = new Test("Dvojotazkovy");
+        Test t2 = new Test("Trojotazkovy");
         t2.addQuestion(q1);
         t2.addQuestion(q2);
         tests = new TestSet();

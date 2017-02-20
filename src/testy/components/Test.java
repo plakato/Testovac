@@ -36,5 +36,6 @@ public class Test {
     
      public void evaluate(Stage stage) {
          System.out.println("Vyhodnocujem...");
+         
      }
 }
