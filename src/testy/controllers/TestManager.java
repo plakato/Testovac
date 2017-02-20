@@ -39,7 +39,8 @@ public class TestManager {
         finish.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                test.evaluate(stage);      }      
+                test.evaluate(tabPane);      
+            }      
         });
         finish.setStyle("-fx-font-size:20;");
         VBox outerVBox = new VBox(tabPane, finish);

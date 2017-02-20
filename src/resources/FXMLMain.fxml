@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="testy.FXMLMainController">
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="testy.controllers.FXMLMainController">
    <children>
       <Label alignment="TOP_CENTER" contentDisplay="CENTER" style="-fx-font-size: 40;" text="Testovač" textAlignment="CENTER">
          <VBox.margin>

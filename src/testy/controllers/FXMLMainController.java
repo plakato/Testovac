@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package testy;
+package testy.controllers;
 
 import java.awt.Font;
 import javafx.geometry.Insets;
@@ -36,8 +36,15 @@ import testy.controllers.TestManager;
 public class FXMLMainController implements Initializable {
      
     @FXML
-    private void handleButtonActionTeacher(ActionEvent event) {
-        System.out.println("You clicked teacher!");       
+    private void handleButtonActionTeacher(ActionEvent event) throws IOException {
+        System.out.println("You clicked teacher!");  
+        Node source = (Node)event.getSource();
+        Stage stage = (Stage)source.getScene().getWindow();
+
+        Parent root = FXMLLoader.load(getClass().getResource("/resources/FXMLSignIn.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
     
     @FXML
@@ -81,7 +88,7 @@ public class FXMLMainController implements Initializable {
         Stage stage=(Stage) node.getScene().getWindow();
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("FXMLMain.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/resources/FXMLMain.fxml"));
         } catch (IOException e) {
             //Never should happen
             //TODO:Inform the user of the error

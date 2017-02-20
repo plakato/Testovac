@@ -19,6 +19,7 @@ import testy.components.Question;
 import testy.components.Singlechoice;
 import testy.components.Test;
 import testy.components.TestSet;
+import testy.components.WrittenAnswer;
 
 /**
  *
@@ -37,12 +38,18 @@ public class Loader {
         correct.add(1);
         correct.add(3);
         Question q2 = new Multichoice("Kto sú tvoji super kamoši?",answers,correct);
+        ArrayList<String> wanswers = new ArrayList<>();
+        wanswers.add("mff");
+        wanswers.add("matfyz");
+        wanswers.add("karlovka");
+        Question q3 = new WrittenAnswer("Kde študuješ?", wanswers);
         
         Test t1 = new Test("Jednootazkovy");
         t1.addQuestion(q1);
         Test t2 = new Test("Trojotazkovy");
         t2.addQuestion(q1);
         t2.addQuestion(q2);
+        t2.addQuestion(q3);
         tests = new TestSet();
         tests.addTest(t1);
         tests.addTest(t2);
