@@ -5,8 +5,12 @@
  */
 package testy.components;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
@@ -38,14 +42,18 @@ public class Test {
         return questions;
     }
     
-     public void evaluate(Stage stage) {
+     public void evaluate(Stage stage) throws IOException {
          Debugger.println("Vyhodnocujem...");
          double totalPoints = 0;
          for (Question q : questions) {
              totalPoints += q.getPoints();
          }
          Debugger.println("Total points: " + totalPoints);
-         FXMLResultController.display(totalPoints);
-         
+         FXMLLoader loader = new FXMLLoader();
+         Parent root = loader.load(getClass().getResource("/resources/FXMLResult.fxml"));        
+         Scene scene = new Scene(root);
+         stage.setScene(scene);
+         stage.show();
+         loader.getController().setPointsLabel(totalPoints);        
      }
 }

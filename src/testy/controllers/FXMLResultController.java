@@ -5,9 +5,16 @@
  */
 package testy.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -24,7 +31,12 @@ public class FXMLResultController implements Initializable {
         // TODO
     }    
     
-    public static void display(double points) {
-        
+    @FXML
+    private Label pointsLabel;
+    
+    @FXML
+    public void setPointsLabel(double points) {
+        System.out.println("tadaa");
+        pointsLabel.setText(Double.toString(points));
     }
 }

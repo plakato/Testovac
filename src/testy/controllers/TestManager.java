@@ -5,9 +5,12 @@
  */
 package testy.controllers;
 
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -35,11 +38,19 @@ public class TestManager {
            tabPane.getTabs().add(tab);
            counter++;
         }
+        
         Button finish = new Button("Ukončiť test!");
         finish.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                test.evaluate(stage);      
+               try {
+                   test.evaluate(stage);
+               }  catch (IOException e) {
+                   Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setContentText("Ojoj, vyskytol sa problém. Aplikácia sa musí ukončiť.");
+                    alert.showAndWait();
+               }    
             }      
         });
         finish.setStyle("-fx-font-size:20;");
