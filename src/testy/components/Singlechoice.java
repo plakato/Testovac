@@ -16,6 +16,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import testy.Debugger;
 
 /**
  *
@@ -23,12 +24,15 @@ import javafx.scene.layout.VBox;
  */
 public class Singlechoice extends Question {
     private List<String> choices;
-    private int correct;
+    private String correct;
     private String selected = "";
-    public Singlechoice(String question, List<String> choices, int correct) {
+    private double points;
+    
+    public Singlechoice(String question, List<String> choices, String correct, double points) {
         this.question = question;
         this.choices = choices;
         this.correct = correct;
+        this.points = points;
     }
     public List<String> getChoices() {
         return choices;
@@ -57,5 +61,14 @@ public class Singlechoice extends Question {
             
         });
         return vbox;
+    }
+
+    @Override
+    public double getPoints() {
+        Debugger.println("From Singlechoice is selected: " + selected);
+        if (selected.equals(correct)) {
+            return points;
+        }
+        return 0;
     }
 }

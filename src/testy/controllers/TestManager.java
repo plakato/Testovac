@@ -39,7 +39,7 @@ public class TestManager {
         finish.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                test.evaluate(tabPane);      
+                test.evaluate(stage);      
             }      
         });
         finish.setStyle("-fx-font-size:20;");

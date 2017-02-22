@@ -10,6 +10,8 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
+import testy.Debugger;
+import testy.controllers.FXMLResultController;
 
 /**
  *
@@ -36,11 +38,14 @@ public class Test {
         return questions;
     }
     
-     public void evaluate(TabPane tabpane) {
-         System.out.println("Vyhodnocujem...");
-         for ( Tab tab : tabpane.getTabs()) {
-             
-             
+     public void evaluate(Stage stage) {
+         Debugger.println("Vyhodnocujem...");
+         double totalPoints = 0;
+         for (Question q : questions) {
+             totalPoints += q.getPoints();
          }
+         Debugger.println("Total points: " + totalPoints);
+         FXMLResultController.display(totalPoints);
+         
      }
 }

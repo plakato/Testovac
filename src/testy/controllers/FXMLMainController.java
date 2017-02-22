@@ -24,6 +24,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import testy.Debugger;
 import testy.components.Test;
 import testy.components.TestSet;
 import testy.controllers.Loader;
@@ -37,7 +38,7 @@ public class FXMLMainController implements Initializable {
      
     @FXML
     private void handleButtonActionTeacher(ActionEvent event) throws IOException {
-        System.out.println("You clicked teacher!");  
+        Debugger.println("You clicked teacher!");  
         Node source = (Node)event.getSource();
         Stage stage = (Stage)source.getScene().getWindow();
 
@@ -49,7 +50,7 @@ public class FXMLMainController implements Initializable {
     
     @FXML
     private void handleButtonActionStudent(ActionEvent event) throws IOException {
-        System.out.println("You clicked student!");    
+        Debugger.println("You clicked student!");    
         Node source =(Node) event.getSource();
         Stage stage =(Stage) source.getScene().getWindow();
         

@@ -33,16 +33,17 @@ public class Loader {
         answers.add("Lukáš");
         answers.add("Paťka");
         answers.add("Kačka");
-        Question q1 = new Singlechoice("Ako sa voláš?", answers, 2);
-        ArrayList<Integer> correct = new ArrayList<>();
-        correct.add(1);
-        correct.add(3);
-        Question q2 = new Multichoice("Kto sú tvoji super kamoši?",answers,correct);
+        Question q1 = new Singlechoice("Ako sa voláš?", answers, "Paťka", 1);
+        ArrayList<Boolean> correct = new ArrayList<>();
+        correct.add(true);
+        correct.add(false);
+        correct.add(true);
+        Question q2 = new Multichoice("Kto sú tvoji super kamoši?",answers,correct, 1);
         ArrayList<String> wanswers = new ArrayList<>();
         wanswers.add("mff");
         wanswers.add("matfyz");
         wanswers.add("karlovka");
-        Question q3 = new WrittenAnswer("Kde študuješ?", wanswers);
+        Question q3 = new WrittenAnswer("Kde študuješ?", wanswers, 1);
         
         Test t1 = new Test("Jednootazkovy");
         t1.addQuestion(q1);

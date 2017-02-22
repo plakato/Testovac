@@ -10,6 +10,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import testy.Debugger;
 
 /**
  *
@@ -18,10 +19,12 @@ import javafx.scene.layout.Pane;
 public class WrittenAnswer extends Question {
     private ArrayList<String> possibleAnswers;
     private String writtenAnswer = "";
+    private double points;
     
-    public WrittenAnswer(String question, ArrayList<String> possibleAnswers) {
+    public WrittenAnswer(String question, ArrayList<String> possibleAnswers, double points) {
         this.question = question;
         this.possibleAnswers = possibleAnswers;
+        this.points = points;
     }
     
     @Override
@@ -37,6 +40,21 @@ public class WrittenAnswer extends Question {
         });
         pane.getChildren().add(field);
         return pane;
+    }
+
+    @Override
+    public double getPoints() {
+        Debugger.println("In written answer was entered: " + writtenAnswer);
+        boolean foundCorrect = false;
+        for (String answer : possibleAnswers) {
+            if (writtenAnswer.equals(answer)) {
+                foundCorrect = true;
+            }
+        }
+        if (foundCorrect) {
+            return points;
+        }
+        return 0;
     }
     
 }
