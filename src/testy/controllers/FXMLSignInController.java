@@ -9,17 +9,26 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
@@ -43,14 +52,23 @@ public class FXMLSignInController implements Initializable {
     }    
     
     @FXML
-    private void handleActionBack(ActionEvent event) throws IOException {
+    private void handleActionBack(ActionEvent event) {
         Node source = (Node)event.getSource();
         Stage stage = (Stage)source.getScene().getWindow();
         
-        Parent root = FXMLLoader.load(getClass().getResource("/resources/FXMLMain.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/resources/FXMLMain.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Ojoj, vyskytol sa problém. Aplikácia sa musí ukončiť.");
+            alert.showAndWait();
+            System.exit(0); 
+        }
+        
     }
     
     @FXML
@@ -60,21 +78,30 @@ public class FXMLSignInController implements Initializable {
     
     @FXML
     private void verifyPassword(ActionEvent event) {
-        pass.clear();
-        if (pass.getText() == "heslo") {
+        if (!pass.getText().equals("heslo")) {
+            warning.setText("To nebolo správne heslo!");
+            warning.setTextFill(Paint.valueOf("RED"));
+            pass.clear();
+        }
+        else {
             Node source = (Node)event.getSource();
             Stage stage = (Stage)source.getScene().getWindow();
             TestSet tests = Loader.LoadTests();
             Parent testPane = getPaneWithTests(tests ,stage);
-            VBox vb = new VBox();
+            FlowPane footer = new FlowPane();
             Button back = new Button("Späť");
             //add back-action and create new test button
-            back.setOnAction(e -> Loader.loadStartScreen(stage));
-            
-        }
-        else {
-            warning.setText("To nebolo správne heslo!");
-            warning.setTextFill(Paint.valueOf("RED"));
+            back.setOnAction(e -> handleActionBack(e));
+            Button createNew = new Button("Vytvoriť nový");
+
+            footer.getChildren().addAll(back, createNew);
+            createNew.setAlignment(Pos.CENTER_RIGHT);
+            VBox pane = new VBox(new ScrollPane(testPane), footer);
+            pane.setSpacing(10);
+            pane.setPadding(new Insets(10,10,10,10));
+            Scene scene = new Scene(pane);
+            stage.setScene(scene);
+            stage.show();
         }
     }
     
@@ -89,6 +116,10 @@ public class FXMLSignInController implements Initializable {
             pane.add(edit, 2, counter);
             counter++;
         }
+        pane.setPadding(new Insets(10,10,10,10));
+        pane.setVgap(10);
+        pane.setHgap(10);
+        pane.setBorder(Border.EMPTY);
         return pane;
     }
     
