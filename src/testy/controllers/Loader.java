@@ -4,10 +4,18 @@
  * and open the template in the editor.
  */
 package testy.controllers;
+import java.io.IOException;
 import java.util.ArrayList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
@@ -57,7 +65,28 @@ public class Loader {
         return tests;
     }
     
-   
+   public static Pane givePaneForTestSet(TestSet tests, Stage stage) {
+       VBox pane = new VBox();
+        pane.setPadding(new Insets(10,10,10,10));
+        pane.setSpacing(10);
+        for (Test t : tests.tests) {
+            Label label = new Label(t.getName());
+            label.setStyle("-fx-font-size:30;");
+            label.setPadding(new Insets(10,10,10,10));
+            Button start = new Button("Začať test");
+            start.setStyle("-fx-font-size:20;");
+            start.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    TestManager.displayTest(t, stage);
+                }
+            });     
+            HBox hbox = new HBox(start, label);
+            pane.getChildren().add(hbox);          
+        }
+        return pane;
+   }
     
+   
    
 }

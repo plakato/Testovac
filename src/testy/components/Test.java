@@ -50,10 +50,12 @@ public class Test {
          }
          Debugger.println("Total points: " + totalPoints);
          FXMLLoader loader = new FXMLLoader();
-         Parent root = loader.load(getClass().getResource("/resources/FXMLResult.fxml"));        
+         Parent root = loader.load(getClass().getResource("/resources/FXMLResult.fxml").openStream());        
          Scene scene = new Scene(root);
          stage.setScene(scene);
          stage.show();
-         loader.getController().setPointsLabel(totalPoints);        
+         //FXMLResultController ctrl = (FXMLResultController) loader.getController();
+         //ctrl.setPointsLabel(totalPoints); 
+         FXMLResultController.controller.setPointsLabel(totalPoints);
      }
 }

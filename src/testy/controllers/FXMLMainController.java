@@ -22,6 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import testy.Debugger;
@@ -56,35 +57,17 @@ public class FXMLMainController implements Initializable {
         
         //We dynamically create next layout with the list of all tests available
         TestSet tests = Loader.LoadTests();
-        VBox pane = new VBox();
-        pane.setPadding(new Insets(10,10,10,10));
-        pane.setSpacing(10);
-        for (Test t : tests.tests) {
-            Label label = new Label(t.getName());
-            label.setStyle("-fx-font-size:30;");
-            label.setPadding(new Insets(10,10,10,10));
-            Button start = new Button("Začať test");
-            start.setStyle("-fx-font-size:20;");
-            start.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    TestManager.displayTest(t, stage);
-                }
-            });     
-            HBox hbox = new HBox(start, label);
-            pane.getChildren().add(hbox);          
-        }
+        Pane pane = Loader.givePaneForTestSet(tests, stage);
         Button back = new Button("Späť");
         back.setStyle("-fx-font-size:20;");
-        back.setOnAction(this::handleActionBackToTestList);
+        back.setOnAction(this::handleActionBackToStart);
         pane.getChildren().add(back);
-        Scene scene = new Scene(new ScrollPane(pane));
-        
+        Scene scene = new Scene(new ScrollPane(pane)); 
         stage.setScene(scene);
         stage.show();
     }
     
-    private void handleActionBackToTestList(ActionEvent event) {
+    private void handleActionBackToStart(ActionEvent event) {
         Node node=(Node) event.getSource();
         Stage stage=(Stage) node.getScene().getWindow();
         Parent root = null;
@@ -105,4 +88,5 @@ public class FXMLMainController implements Initializable {
         // TODO
     }    
     
+   
 }
