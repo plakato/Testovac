@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package testy.controllers;
+package testy;
 
 import java.io.IOException;
 import java.util.Optional;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -20,6 +22,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import testy.Debugger;
 import testy.components.Question;
 import testy.components.Test;
 
@@ -62,5 +65,18 @@ public class TestManager {
         stage.show();
     }
      
+    public static void editTest(Test t, Stage stage) {
+        Debugger.println("Editujem " + t.getName() + "...");
+    }
     
+    public static void displayCreateNew(Stage stage) {
+        try {
+            Parent pane = FXMLLoader.load(TestManager.class.getResource("/resources/FXMLNewTest.fxml"));
+            stage.setScene(new Scene(pane));
+            stage.show();
+        }
+        catch (IOException e) {
+            ErrorInformer.exitApp();
+        }
+    }
 }

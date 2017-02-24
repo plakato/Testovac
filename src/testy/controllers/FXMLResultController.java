@@ -5,6 +5,7 @@
  */
 package testy.controllers;
 
+import testy.Loader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,6 +25,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javax.swing.plaf.basic.BasicMenuUI;
 import testy.Debugger;
+import testy.ErrorInformer;
 import testy.components.TestSet;
 
 /**
@@ -78,10 +80,7 @@ public class FXMLResultController implements Initializable {
                     stage.setScene(new Scene(root));
                     stage.show();
                 } catch (IOException e) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("Ojoj, vyskytol sa problém. Aplikácia sa musí ukončiť.");
-                    alert.showAndWait();
-                    System.exit(0); 
+                    ErrorInformer.exitApp();
                 }
             }
         }) ;

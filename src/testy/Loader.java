@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package testy.controllers;
+package testy;
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;

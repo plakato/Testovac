@@ -7,14 +7,19 @@
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/resources/FXMLMain.fxml</file>
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/testy/controllers/FXMLResultController.java</file>
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/testy/components/Question.java</file>
+            <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/testy/controllers/FXMLNewTestController.java</file>
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/testy/controllers/FXMLSignInController.java</file>
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/resources/FXMLSignIn.fxml</file>
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/testy/Testy.java</file>
-            <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/testy/controllers/TestManager.java</file>
-            <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/testy/controllers/Loader.java</file>
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/resources/FXMLResult.fxml</file>
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/testy/controllers/FXMLMainController.java</file>
+            <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/resources/FXMLNewTest.fxml</file>
+            <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/testy/ErrorInformer.java</file>
+            <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/resources/FXMLNewMultichoice.fxml</file>
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/testy/components/WrittenAnswer.java</file>
+            <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/testy/Loader.java</file>
+            <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/testy/controllers/FXMLNewMultichoiceController.java</file>
+            <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/testy/TestManager.java</file>
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/testy/components/Multichoice.java</file>
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/testy/components/Singlechoice.java</file>
         </group>

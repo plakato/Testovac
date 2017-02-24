@@ -14,9 +14,9 @@
             <Font size="27.0" />
          </font>
       </Label>
-      <PasswordField fx:id="pass" layoutX="197.0" layoutY="129.0" onAction="#verifyPassword" prefHeight="32.0" prefWidth="205.0" promptText="Heslo" />
+      <PasswordField fx:id="pass" layoutX="197.0" layoutY="129.0" onAction="#verifyPasswordAndLoadTests" prefHeight="32.0" prefWidth="205.0" promptText="Heslo" />
       <Button layoutX="34.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleActionBack" prefHeight="32.0" prefWidth="49.0" text="Späť" />
-      <Button layoutX="454.0" layoutY="332.0" mnemonicParsing="false" onAction="#verifyPassword" prefHeight="32.0" prefWidth="115.0" text="Potvrdiť" />
+      <Button layoutX="454.0" layoutY="332.0" mnemonicParsing="false" onAction="#verifyPasswordAndLoadTests" prefHeight="32.0" prefWidth="115.0" text="Potvrdiť" />
       <Label fx:id="warning" layoutX="197.0" layoutY="161.0" prefHeight="4.0" prefWidth="205.0" />
    </children>
 </Pane>

@@ -26,10 +26,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import testy.Debugger;
+import testy.ErrorInformer;
 import testy.components.Test;
 import testy.components.TestSet;
-import testy.controllers.Loader;
-import testy.controllers.TestManager;
+import testy.Loader;
+import testy.TestManager;
 
 /**
  *
@@ -75,8 +76,7 @@ public class FXMLMainController implements Initializable {
             root = FXMLLoader.load(getClass().getResource("/resources/FXMLMain.fxml"));
         } catch (IOException e) {
             //Never should happen
-            //TODO:Inform the user of the error
-            System.exit(0);
+            ErrorInformer.exitApp();
         }
         Scene scene = new Scene(root);
         stage.setScene(scene);

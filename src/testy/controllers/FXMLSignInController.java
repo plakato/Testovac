@@ -5,6 +5,8 @@
  */
 package testy.controllers;
 
+import testy.TestManager;
+import testy.Loader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ToolBar;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
@@ -33,6 +36,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import testy.Debugger;
+import testy.ErrorInformer;
 import testy.components.Test;
 import testy.components.TestSet;
 
@@ -63,10 +67,7 @@ public class FXMLSignInController implements Initializable {
             stage.show();
         }
         catch (IOException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Ojoj, vyskytol sa problém. Aplikácia sa musí ukončiť.");
-            alert.showAndWait();
-            System.exit(0); 
+            ErrorInformer.exitApp();
         }
         
     }
@@ -77,7 +78,7 @@ public class FXMLSignInController implements Initializable {
     private Label warning;
     
     @FXML
-    private void verifyPassword(ActionEvent event) {
+    private void verifyPasswordAndLoadTests(ActionEvent event) {
         if (!pass.getText().equals("heslo")) {
             warning.setText("To nebolo správne heslo!");
             warning.setTextFill(Paint.valueOf("RED"));
@@ -88,14 +89,16 @@ public class FXMLSignInController implements Initializable {
             Stage stage = (Stage)source.getScene().getWindow();
             TestSet tests = Loader.LoadTests();
             Parent testPane = getPaneWithTests(tests ,stage);
-            FlowPane footer = new FlowPane();
+            
             Button back = new Button("Späť");
-            //add back-action and create new test button
             back.setOnAction(e -> handleActionBack(e));
+            Pane spacer = new Pane();
+            HBox.setHgrow(spacer, Priority.ALWAYS);
             Button createNew = new Button("Vytvoriť nový");
+            createNew.setOnAction(e -> TestManager.displayCreateNew(stage));
 
-            footer.getChildren().addAll(back, createNew);
-            createNew.setAlignment(Pos.CENTER_RIGHT);
+            HBox footer = new HBox(back, spacer, createNew);
+
             VBox pane = new VBox(new ScrollPane(testPane), footer);
             pane.setSpacing(10);
             pane.setPadding(new Insets(10,10,10,10));
@@ -111,7 +114,7 @@ public class FXMLSignInController implements Initializable {
         for (Test test : tests.tests) {
             Label name = new Label(test.getName());
             Button edit = new Button("Editovať");
-            edit.setOnAction(e -> editTest(test,stage));
+            edit.setOnAction(e -> TestManager.editTest(test,stage));
             pane.add(name, 1, counter);
             pane.add(edit, 2, counter);
             counter++;
@@ -123,7 +126,4 @@ public class FXMLSignInController implements Initializable {
         return pane;
     }
     
-    private void editTest(Test t, Stage stage) {
-        Debugger.println("Editujem " + t.getName() + "...");
-    }
 }
