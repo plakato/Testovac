@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package testy.components;
+package components;
 
 import com.sun.javafx.binding.BidirectionalBinding;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import testy.Debugger;
+import main.Debugger;
 
 /**
  *
@@ -74,5 +74,9 @@ public class Multichoice extends Question {
         }
         
         return result;
+    }
+    
+    public List<Boolean> getCorrect() {
+        return correct;
     }
 }

@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package testy;
+package controllers;
+
+import components.Question;
+import javafx.scene.control.Label;
 
 /**
  *
  * @author plaka
  */
-public class Debugger {
-    
-    public static void println(String s) {
-        System.out.println(s);
-    }
+public interface IFXMLNewQuestion {
+    public void setQuestion(Question q, int row);
 }

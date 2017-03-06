@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package testy;
+package main;
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
@@ -22,12 +22,21 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import testy.components.Multichoice;
-import testy.components.Question;
-import testy.components.Singlechoice;
-import testy.components.Test;
-import testy.components.TestSet;
-import testy.components.WrittenAnswer;
+import components.Multichoice;
+import components.Question;
+import components.Singlechoice;
+import components.Test;
+import components.TestSet;
+import components.WrittenAnswer;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -35,6 +44,29 @@ import testy.components.WrittenAnswer;
  */
 public class Loader {
     public static TestSet LoadTests() {
+     TestSet tests = new TestSet();
+     List<File> filesInFolder = new ArrayList<>();
+        try {
+            filesInFolder = Files.walk(Paths.get("src/tests/"))
+                            .filter(Files::isRegularFile)
+                            .map(Path::toFile)
+                            .collect(Collectors.toList());
+     } catch (IOException ex) {
+         ErrorInformer.exitApp();
+     }
+        
+     for (File file : filesInFolder) {
+         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
+             Test t = (Test)in.readObject();
+             tests.addTest(t);
+         } catch (IOException | ClassNotFoundException e) {
+            ErrorInformer.exitApp();   
+         }
+     }
+    return tests;
+    }
+    
+    private static TestSet getDefaults() {
         TestSet tests;
 
         ArrayList<String> answers = new ArrayList<>();

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package testy;
+package main;
 
 import javafx.scene.control.Alert;
 
@@ -17,5 +17,11 @@ public class ErrorInformer {
                     alert.setContentText("Ojoj, vyskytol sa problém. Aplikácia sa musí ukončiť.");
                     alert.showAndWait();
                     System.exit(0);
+    }
+    public static void failedInSavingTest() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("Váš test nebolo možné uložiť. Sorry.");
+                    alert.showAndWait();
+                    alert.close();
     }
 }

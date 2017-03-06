@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package testy;
+package main;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -22,9 +22,16 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import testy.Debugger;
-import testy.components.Question;
-import testy.components.Test;
+import main.Debugger;
+import components.Question;
+import components.Test;
+import components.TestSet;
+import javafx.geometry.Insets;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 
 /**
  *
@@ -64,10 +71,6 @@ public class TestManager {
         stage.setScene(scene);
         stage.show();
     }
-     
-    public static void editTest(Test t, Stage stage) {
-        Debugger.println("Editujem " + t.getName() + "...");
-    }
     
     public static void displayCreateNew(Stage stage) {
         try {
@@ -79,4 +82,5 @@ public class TestManager {
             ErrorInformer.exitApp();
         }
     }
+    
 }

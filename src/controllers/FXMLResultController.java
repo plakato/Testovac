@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package testy.controllers;
+package controllers;
 
-import testy.Loader;
+import main.Loader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,9 +24,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javax.swing.plaf.basic.BasicMenuUI;
-import testy.Debugger;
-import testy.ErrorInformer;
-import testy.components.TestSet;
+import main.Debugger;
+import main.ErrorInformer;
+import components.TestSet;
 
 /**
  * FXML Controller class

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package testy.controllers;
+package controllers;
 
 import java.awt.Font;
 import javafx.geometry.Insets;
@@ -25,12 +25,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import testy.Debugger;
-import testy.ErrorInformer;
-import testy.components.Test;
-import testy.components.TestSet;
-import testy.Loader;
-import testy.TestManager;
+import main.Debugger;
+import main.ErrorInformer;
+import components.Test;
+import components.TestSet;
+import main.Loader;
+import main.TestManager;
 
 /**
  *

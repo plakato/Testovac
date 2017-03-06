@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package testy.components;
-
-import javafx.scene.layout.Pane;
+package main;
 
 /**
  *
  * @author plaka
  */
-public abstract class Question {
-  public String question;
-  public abstract Pane getPaneOfChoices();
-  public abstract double getPoints();
+public class Debugger {
+    
+    public static void println(String s) {
+        System.out.println(s);
+    }
 }

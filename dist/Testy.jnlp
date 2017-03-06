@@ -8,11 +8,11 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Testy.jar" size="35181" download="eager" />
+    <jar href="Testy.jar" size="48091" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Testy" >
     <param name="requiredFXVersion" value="8.0+"/>
   </applet-desc>
-  <jfx:javafx-desc  width="800" height="600" main-class="testy.Testy"  name="Testy" />
+  <jfx:javafx-desc  width="800" height="600" main-class="main.Testy"  name="Testy" />
   <update check="always"/>
 </jnlp>

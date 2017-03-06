@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package testy.controllers;
+package controllers;
 
-import testy.TestManager;
-import testy.Loader;
+import main.TestManager;
+import main.Loader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -35,10 +35,11 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import testy.Debugger;
-import testy.ErrorInformer;
-import testy.components.Test;
-import testy.components.TestSet;
+import main.Debugger;
+import main.ErrorInformer;
+import components.Test;
+import components.TestSet;
+import javafx.scene.paint.Color;
 
 /**
  * FXML Controller class
@@ -81,49 +82,16 @@ public class FXMLSignInController implements Initializable {
     private void verifyPasswordAndLoadTests(ActionEvent event) {
         if (!pass.getText().equals("heslo")) {
             warning.setText("To nebolo správne heslo!");
-            warning.setTextFill(Paint.valueOf("RED"));
+            warning.setTextFill(Color.RED);
             pass.clear();
         }
         else {
-            Node source = (Node)event.getSource();
-            Stage stage = (Stage)source.getScene().getWindow();
-            TestSet tests = Loader.LoadTests();
-            Parent testPane = getPaneWithTests(tests ,stage);
-            
-            Button back = new Button("Späť");
-            back.setOnAction(e -> handleActionBack(e));
-            Pane spacer = new Pane();
-            HBox.setHgrow(spacer, Priority.ALWAYS);
-            Button createNew = new Button("Vytvoriť nový");
-            createNew.setOnAction(e -> TestManager.displayCreateNew(stage));
-
-            HBox footer = new HBox(back, spacer, createNew);
-
-            VBox pane = new VBox(new ScrollPane(testPane), footer);
-            pane.setSpacing(10);
-            pane.setPadding(new Insets(10,10,10,10));
-            Scene scene = new Scene(pane);
-            stage.setScene(scene);
-            stage.show();
+            Stage stage = (Stage)pass.getScene().getWindow();
+            TeacherAllTestsViewController ctrl = new TeacherAllTestsViewController(); 
+            ctrl.loadAndShowAllTests(stage);
         }
     }
     
-    private Parent getPaneWithTests(TestSet tests,Stage stage) {
-        GridPane pane = new GridPane();
-        int counter = 1;
-        for (Test test : tests.tests) {
-            Label name = new Label(test.getName());
-            Button edit = new Button("Editovať");
-            edit.setOnAction(e -> TestManager.editTest(test,stage));
-            pane.add(name, 1, counter);
-            pane.add(edit, 2, counter);
-            counter++;
-        }
-        pane.setPadding(new Insets(10,10,10,10));
-        pane.setVgap(10);
-        pane.setHgap(10);
-        pane.setBorder(Border.EMPTY);
-        return pane;
-    }
+    
     
 }

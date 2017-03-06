@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package testy.components;
+package components;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,14 +14,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
-import testy.Debugger;
-import testy.controllers.FXMLResultController;
+import main.Debugger;
+import controllers.FXMLResultController;
+import java.io.Serializable;
 
 /**
  *
  * @author plaka
  */
-public class Test {
+public class Test implements Serializable {
     private String name;
     private ArrayList<Question> questions;
     
@@ -33,9 +34,20 @@ public class Test {
     public void addQuestion(Question q) {
         questions.add(q); 
    }
+    public void removeQuestion(Question q) {
+        questions.remove(q);
+    }
+    public void changeQuestion(Question oldQ, Question newQ) {
+        int index = questions.indexOf(oldQ);
+        questions.set(index, newQ);
+    }
     
     public String getName() {
         return name;
+    }
+    
+    public void changeName(String name) {
+        this.name = name;
     }
     
     public ArrayList<Question> getQuestions() {
@@ -54,8 +66,6 @@ public class Test {
          Scene scene = new Scene(root);
          stage.setScene(scene);
          stage.show();
-         //FXMLResultController ctrl = (FXMLResultController) loader.getController();
-         //ctrl.setPointsLabel(totalPoints); 
          FXMLResultController.controller.setPointsLabel(totalPoints);
      }
 }

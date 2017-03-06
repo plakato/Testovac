@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package testy.components;
+package components;
 
 import java.util.List;
 import javafx.beans.value.ChangeListener;
@@ -16,7 +16,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import testy.Debugger;
+import main.Debugger;
 
 /**
  *
