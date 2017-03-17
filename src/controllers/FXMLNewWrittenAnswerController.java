@@ -5,9 +5,9 @@
  */
 package controllers;
 
-import components.Multichoice;
 import components.Question;
-import java.awt.Checkbox;
+import components.Singlechoice;
+import components.WrittenAnswer;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,13 +20,12 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
@@ -39,7 +38,7 @@ import main.Debugger;
  *
  * @author plaka
  */
-public class FXMLNewMultichoiceController implements Initializable,IFXMLNewQuestion {
+public class FXMLNewWrittenAnswerController implements Initializable, IFXMLNewQuestion {
 
     /**
      * Initializes the controller class.
@@ -47,35 +46,34 @@ public class FXMLNewMultichoiceController implements Initializable,IFXMLNewQuest
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    } 
+    for (Node node : optionsGridPane.getChildren()) {
+           if (node instanceof TextField) {
+               optionsGridPane.setRowIndex(node, 0);
+           }
+       }
+    }    
     @FXML
-    private GridPane optionsGridPane; 
+    private GridPane optionsGridPane;   
     @FXML
     private HBox addRemoveButtons;
     @FXML
-    private Button addChoiceButton;
+    private TextField points;
     @FXML
     private TextArea questionText;
     @FXML
     private Label warning;
     @FXML
     private Button addQuestionButton;
-    @FXML
-    private TextField points;
     
     @FXML
     private void addChoice(ActionEvent event) {
-        CheckBox checkbox = new CheckBox();
         TextField field = new TextField();
         field.setPrefWidth(530);
         optionsGridPane.getRowConstraints().add(new RowConstraints(30));
         int buttonsIndex = optionsGridPane.getRowIndex(addRemoveButtons);
         optionsGridPane.setRowIndex(addRemoveButtons, buttonsIndex+1);
-        optionsGridPane.setRowIndex(field,optionsGridPane.getRowConstraints().size()-2);
-        optionsGridPane.setRowIndex(checkbox,optionsGridPane.getRowConstraints().size()-2);
-        
-        optionsGridPane.add(field,1,optionsGridPane.getRowConstraints().size()-2);
-        optionsGridPane.add(checkbox,0,optionsGridPane.getRowConstraints().size()-2); 
+        optionsGridPane.setRowIndex(field,optionsGridPane.getRowConstraints().size()-2);        
+        optionsGridPane.add(field,0,optionsGridPane.getRowConstraints().size()-2);
 
         Node source = (Node)event.getSource();
         Stage stage = (Stage)source.getScene().getWindow();
@@ -133,33 +131,31 @@ public class FXMLNewMultichoiceController implements Initializable,IFXMLNewQuest
             warning.setTextFill(Color.RED);
             return false;
         }
+        for (Node node : optionsGridPane.getChildren()) {
+            if (node instanceof TextField && ((TextField)node).getText().equals("")) {
+            warning.setText("Prázdna možnosť nemôže byť správna, to by bolo priľahké.");
+            warning.setTextFill(Color.RED);
+            return false;
+            }
+        }
         return true;
     }
-
     
     private Question createQuestionFromForm() {
         int choicesCount = optionsGridPane.getRowConstraints().size()-1;
         Debugger.println("choices count calculated is " + choicesCount);
         List<String> choices = new ArrayList<>(choicesCount);
-        List<Boolean> correct = new ArrayList<>(choicesCount);
         Collections.fill(choices, null);
-        Collections.fill(correct, false);
         
         for (Node node : optionsGridPane.getChildren()) {
             if (node instanceof TextField) {
-                Debugger.println("text at "+optionsGridPane.getRowIndex(node) );
+                Debugger.println("text at "+optionsGridPane.getRowIndex(node));
                 choices.add(optionsGridPane.getRowIndex(node),((TextField) node).getText());
             }
-            if (node instanceof CheckBox) {
-                Debugger.println("box at "+optionsGridPane.getRowIndex(node) );
-                correct.add(optionsGridPane.getRowIndex(node),((CheckBox) node).isSelected());
-            }
         }
-        for (int i = 0; i < choicesCount; i++) {
-            Debugger.println(choices.get(i) + " : " + correct.get(i));
-        }
-        Debugger.println(questionText.getText());
-        Question q = new Multichoice(questionText.getText(), choices, correct, Double.parseDouble(points.getText()));
+
+        // Points are valid - we checked in addQuestion()
+        Question q = new WrittenAnswer(questionText.getText(), choices, Double.parseDouble(points.getText()));
         return q;
     }
 
@@ -169,40 +165,30 @@ public class FXMLNewMultichoiceController implements Initializable,IFXMLNewQuest
         optionsGridPane.getRowConstraints().remove(0);
         Set<Node> toRemove = new HashSet<>();
         for (Node n : optionsGridPane.getChildren()) {
-            if (n instanceof CheckBox || n instanceof TextField) {
+            if (n instanceof TextField) {
                 toRemove.add(n);
             }
         }
         optionsGridPane.getChildren().removeAll(toRemove);
         questionText.setText(q.question);
-        Multichoice mq = (Multichoice)q;
-        double mqPoints = mq.getPoints();  
+        WrittenAnswer wa = (WrittenAnswer)q;
+        double waPoints = wa.getPoints();  
         
-        if(mqPoints == (long) mqPoints)
-            points.setText(String.format("%d",(long)mqPoints));
+        if(waPoints == (long) waPoints)
+            points.setText(String.format("%d",(long)waPoints));
         else
-            points.setText(String.format("%s",mqPoints));
-        points.setText(Double.toString(mq.getPoints()));
-        Debugger.println("choices count is "+ mq.getChoices().size());
-                Debugger.println("row contraints count is "+ optionsGridPane.getRowConstraints().size());
-
-        for (String s : mq.getChoices()) {
-            CheckBox checkbox = new CheckBox();
+            points.setText(String.format("%s",waPoints));
+        
+        for (String s : wa.getChoices()) {
             TextField field = new TextField();
             field.setPrefWidth(530);
             field.setText(s);
-            checkbox.setSelected(mq.getCorrect().get(mq.getChoices().indexOf(s)));
             optionsGridPane.getRowConstraints().add(new RowConstraints(30));
-
             optionsGridPane.setRowIndex(field,optionsGridPane.getRowConstraints().size()-2);
-            optionsGridPane.setRowIndex(checkbox,optionsGridPane.getRowConstraints().size()-2);
-
-            optionsGridPane.add(field,1,optionsGridPane.getRowConstraints().size()-2);
-            optionsGridPane.add(checkbox,0,optionsGridPane.getRowConstraints().size()-2); 
-
+            optionsGridPane.add(field,0,optionsGridPane.getRowConstraints().size()-2);
         }
         int buttonsIndex = optionsGridPane.getRowIndex(addRemoveButtons);
-        optionsGridPane.setRowIndex(addRemoveButtons, mq.getChoices().size());
+        optionsGridPane.setRowIndex(addRemoveButtons, wa.getChoices().size());
         addQuestionButton.setText("Uložiť zmeny");
         addQuestionButton.setOnAction(new EventHandler<ActionEvent>(){
             @Override
@@ -210,7 +196,7 @@ public class FXMLNewMultichoiceController implements Initializable,IFXMLNewQuest
                 if (!correctEntries())
                     return;
                 Question newQuestion = createQuestionFromForm();
-                Debugger.println("new question choices count is "+ ((Multichoice)newQuestion).getChoices().size());
+                Debugger.println("new question choices count is "+ ((WrittenAnswer)newQuestion).getChoices().size());
                 Stage stage = (Stage)addQuestionButton.getScene().getWindow();
                 stage.close();
                 FXMLNewTestController ctrl = FXMLNewTestController.getController();
@@ -218,6 +204,6 @@ public class FXMLNewMultichoiceController implements Initializable,IFXMLNewQuest
             }
             
         });
-    }
+    }    
     
 }

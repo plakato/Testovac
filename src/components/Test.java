@@ -37,6 +37,9 @@ public class Test implements Serializable {
     public void removeQuestion(Question q) {
         questions.remove(q);
     }
+    public void removeQuestionFromIndex(int i) {
+        questions.remove(i);
+    }
     public void changeQuestion(Question oldQ, Question newQ) {
         int index = questions.indexOf(oldQ);
         questions.set(index, newQ);
@@ -58,7 +61,7 @@ public class Test implements Serializable {
          Debugger.println("Vyhodnocujem...");
          double totalPoints = 0;
          for (Question q : questions) {
-             totalPoints += q.getPoints();
+             totalPoints += q.getScore();
          }
          Debugger.println("Total points: " + totalPoints);
          FXMLLoader loader = new FXMLLoader();

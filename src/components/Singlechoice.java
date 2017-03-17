@@ -37,6 +37,15 @@ public class Singlechoice extends Question {
     public List<String> getChoices() {
         return choices;
     }
+    
+    public String getCorrect() {
+        return correct;
+    }
+    
+    @Override
+    public double getPoints() {
+        return points;
+    }
 
     @Override
     public Pane getPaneOfChoices() {
@@ -64,7 +73,7 @@ public class Singlechoice extends Question {
     }
 
     @Override
-    public double getPoints() {
+    public double getScore() {
         Debugger.println("From Singlechoice is selected: " + selected);
         if (selected.equals(correct)) {
             return points;

@@ -49,6 +49,7 @@ public class FXMLNewTestController implements Initializable {
 
     private Test test;
     private static FXMLNewTestController controller;
+    private String previousTestName = null;
     /**
      * Initializes the controller class.
      */
@@ -70,6 +71,7 @@ public class FXMLNewTestController implements Initializable {
     }  
     
     public void setThisTest(Test test) {
+        previousTestName = test.getName();
         this.test.changeName(test.getName());
         name.setText(test.getName());
         for (Question q : test.getQuestions()) {
@@ -93,16 +95,29 @@ public class FXMLNewTestController implements Initializable {
     @FXML
     private void addSinglechoiceQuestion(ActionEvent e) {
         Stage stage = new Stage();
-        Node source = (Node)e.getSource();
-        Scene scene = source.getScene();
-        stage.setTitle("Nová otázka s jednou možnosťou");
-        
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/resources/FXMLNewSinglechoice.fxml"));
+            stage.setScene(new Scene(root));
+            stage.setTitle("Nová otázka s jednou možnosťou");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        } catch (IOException ex) {
+            ErrorInformer.exitApp();
+        }        
     }
     
     @FXML
     private void addWrittenAnswerQuestion() {
         Stage stage = new Stage();
-        stage.setTitle("Nová otázka s písomnou odpoveďou");
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/resources/FXMLNewWrittenAnswer.fxml"));
+            stage.setScene(new Scene(root));
+            stage.setTitle("Nová otázka s písomnou odpoveďou");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        } catch (IOException ex) {
+            ErrorInformer.exitApp();
+        }      
     }  
     
     @FXML
@@ -112,15 +127,20 @@ public class FXMLNewTestController implements Initializable {
             nameWarning.setTextFill(Color.RED);
             return;
         }
-        if (testWithSameName(name.getText())) {
-            nameWarning.setText("Test s týmto názvom už existuje. Buďte originálny!");
-            nameWarning.setTextFill(Color.RED);
-            return;
-        }
         test.changeName(name.getText());
         Debugger.println(test.getName());
         for (Question q : test.getQuestions()) {
             Debugger.println(q.question);
+        }
+        //delete the previous version of the test
+        if (previousTestName != null) {
+          File file = new File("src/tests/"+previousTestName+".ser");
+          file.delete();  
+        }   
+        if (testWithSameName(name.getText())) {
+          nameWarning.setText("Test s týmto názvom už existuje. Buďte originálny!");
+          nameWarning.setTextFill(Color.RED);
+          return;
         }
         //save this test
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("src/tests/"+test.getName()+".ser"))) {
@@ -181,10 +201,16 @@ public class FXMLNewTestController implements Initializable {
                 stage.setTitle("Editácia otázky s viacerými možnosťami");
             }
             else if (q instanceof Singlechoice) {
-                
+                loader = new FXMLLoader(getClass().getResource("/resources/FXMLNewSinglechoice.fxml"));
+                root = loader.load();
+                ((IFXMLNewQuestion)loader.getController()).setQuestion(q, row);
+                stage.setTitle("Editácia otázky s jednou možnosťou");
             }
             else if (q instanceof WrittenAnswer) {
-                
+                loader = new FXMLLoader(getClass().getResource("/resources/FXMLNewWrittenAnswer.fxml"));
+                root = loader.load();
+                ((IFXMLNewQuestion)loader.getController()).setQuestion(q, row);
+                stage.setTitle("Editácia otázky s písomnou odpoveďou");
             }
             
         } catch (IOException ex) {
@@ -210,6 +236,7 @@ public class FXMLNewTestController implements Initializable {
         for (Node node : toRemove) {
             questionsGrid.getChildren().remove(node);
         }
+        test.removeQuestionFromIndex(removedRow);
         questionsGrid.getRowConstraints().remove(questionsGrid.getRowConstraints().size()-1);
     }
     

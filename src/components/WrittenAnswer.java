@@ -6,6 +6,7 @@
 package components;
 
 import java.util.ArrayList;
+import java.util.List;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
@@ -17,11 +18,11 @@ import main.Debugger;
  * @author plaka
  */
 public class WrittenAnswer extends Question {
-    private ArrayList<String> possibleAnswers;
+    private List<String> possibleAnswers;
     private String writtenAnswer = "";
     private double points;
     
-    public WrittenAnswer(String question, ArrayList<String> possibleAnswers, double points) {
+    public WrittenAnswer(String question, List<String> possibleAnswers, double points) {
         this.question = question;
         this.possibleAnswers = possibleAnswers;
         this.points = points;
@@ -43,7 +44,7 @@ public class WrittenAnswer extends Question {
     }
 
     @Override
-    public double getPoints() {
+    public double getScore() {
         Debugger.println("In written answer was entered: " + writtenAnswer);
         boolean foundCorrect = false;
         for (String answer : possibleAnswers) {
@@ -56,5 +57,14 @@ public class WrittenAnswer extends Question {
         }
         return 0;
     }
+
+    @Override
+    public double getPoints() {
+        return points;
+    }
+    
+    public List<String> getChoices() {
+        return possibleAnswers;
+    } 
     
 }

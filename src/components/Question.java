@@ -15,5 +15,6 @@ import javafx.scene.layout.Pane;
 public abstract class Question implements Serializable {
   public String question;
   public abstract Pane getPaneOfChoices();
+  public abstract double getScore();
   public abstract double getPoints();
 }

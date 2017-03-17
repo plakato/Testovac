@@ -58,6 +58,7 @@ public class TeacherAllTestsViewController {
         createNew.setOnAction(e -> TestManager.displayCreateNew(stage));
 
         HBox footer = new HBox(back, spacer, createNew);
+        footer.setSpacing(10);
 
         VBox pane = new VBox(new ScrollPane(testPane), footer);
         pane.setSpacing(10);
@@ -152,8 +153,5 @@ public class TeacherAllTestsViewController {
         stage.show();
         FXMLNewTestController ctrl = loader.getController();
         ctrl.setThisTest(t);
-        //we delete this test, we will later save the editted one
-        File file = new File("src/tests/"+t.getName()+".ser");
-        file.delete();
     }
 }

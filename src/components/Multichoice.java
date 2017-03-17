@@ -63,7 +63,7 @@ public class Multichoice extends Question {
     }
 
     @Override
-    public double getPoints() {
+    public double getScore() {
         Debugger.println("Selected are: ");
         double result = 0;
         for (int i = 0; i < choices.size(); i++) {
@@ -76,6 +76,10 @@ public class Multichoice extends Question {
         return result;
     }
     
+    @Override
+    public double getPoints() {
+        return points;
+    }
     public List<Boolean> getCorrect() {
         return correct;
     }

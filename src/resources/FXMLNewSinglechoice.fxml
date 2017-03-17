@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FXMLNewMultichoiceController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FXMLNewSinglechoiceController">
    <children>
       <HBox spacing="10.0">
          <children>
@@ -26,7 +26,7 @@
             <TextField fx:id="points" text="1" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
-      <Label text="Možnosti (označ správne):" />
+      <Label text="Možnosti (označ správnu):" />
       <GridPane fx:id="optionsGridPane">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="289.0" minWidth="10.0" prefWidth="26.0" />
@@ -37,7 +37,11 @@
           <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <CheckBox mnemonicParsing="false" GridPane.rowIndex="0" />
+            <RadioButton mnemonicParsing="false">
+               <toggleGroup>
+                  <ToggleGroup fx:id="toggles" />
+               </toggleGroup>
+            </RadioButton>
             <TextField prefHeight="25.0" prefWidth="530.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
             <HBox fx:id="addRemoveButtons" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
