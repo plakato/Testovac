@@ -37,6 +37,7 @@ import main.TestManager;
 /**
  *
  * @author plaka
+ * This class takes care of the actions that can be taken from the main screen.
  */
 public class FXMLMainController implements Initializable {
      
@@ -45,6 +46,11 @@ public class FXMLMainController implements Initializable {
         // TODO
     }  
     
+    /**
+     * When user clicks teacher, screen changes to sign in.
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     private void handleButtonActionTeacher(ActionEvent event) throws IOException {
         Debugger.println("You clicked teacher!");  
@@ -57,6 +63,12 @@ public class FXMLMainController implements Initializable {
         stage.show();
     }
     
+    /**
+     * When user clicks on student, scene changes to view of all test
+     * for the student to choose from.
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     private void handleButtonActionStudent(ActionEvent event) throws IOException {
         Debugger.println("You clicked student!");    
@@ -65,8 +77,11 @@ public class FXMLMainController implements Initializable {
         displayTests(stage);       
     }
     
+    /**
+     * Creates layout for all tests and other general actions and displays it.
+     * @param stage 
+     */
     public void displayTests(Stage stage) {
-        //We dynamically create next layout with the list of all tests available
         TestSet tests = Loader.LoadTests();
         Pane pane = Loader.givePaneForTestSet(tests, stage);
         Button back = new Button("Späť");
@@ -88,6 +103,10 @@ public class FXMLMainController implements Initializable {
         stage.show();
     }
     
+    /**
+     * Goes back to the main screen when user clicks Back button.
+     * @param event 
+     */
     private void handleActionBackToStart(ActionEvent event) {
         Node node=(Node) event.getSource();
         Stage stage=(Stage) node.getScene().getWindow();

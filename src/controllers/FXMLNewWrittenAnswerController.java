@@ -37,15 +37,15 @@ import main.Debugger;
  * FXML Controller class
  *
  * @author plaka
+ * Controls actions on the screen where user creates new written answer question.
  */
 public class FXMLNewWrittenAnswerController implements Initializable, IFXMLNewQuestion {
 
     /**
-     * Initializes the controller class.
+     * Initializes the controller class. Sets row index for the first empty answer.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     for (Node node : optionsGridPane.getChildren()) {
            if (node instanceof TextField) {
                optionsGridPane.setRowIndex(node, 0);
@@ -65,6 +65,10 @@ public class FXMLNewWrittenAnswerController implements Initializable, IFXMLNewQu
     @FXML
     private Button addQuestionButton;
     
+    /**
+     * Adds an empty choice to the list of possible correct answers.
+     * @param event 
+     */
     @FXML
     private void addChoice(ActionEvent event) {
         TextField field = new TextField();
@@ -84,6 +88,9 @@ public class FXMLNewWrittenAnswerController implements Initializable, IFXMLNewQu
         
     }
     
+    /**
+     * Removes the last choice from the list of possible answers.
+     */
     @FXML
     private void removeChoice() {
         if (optionsGridPane.getRowConstraints().size() < 2) {
@@ -103,12 +110,19 @@ public class FXMLNewWrittenAnswerController implements Initializable, IFXMLNewQu
         stage.sizeToScene();
     }
     
+    /**
+     * Closes the editing window without saving the test.
+     */
     @FXML
     private void closeWindow() {
         Stage stage = (Stage) optionsGridPane.getScene().getWindow();
         stage.close();
     }
     
+    /**
+     * Saves the question edited by user. Instance is created
+     * from the data entered in the form.
+     */
     @FXML
     private void addQuestion() {
         if (!correctEntries())
@@ -119,6 +133,10 @@ public class FXMLNewWrittenAnswerController implements Initializable, IFXMLNewQu
         stage.close();
     }
     
+    /**
+     * Checks whether all data entered is valid.
+     * @return true if all valid, false otherwise
+     */
     private boolean correctEntries() {
         if (questionText.getText().equals("")) {
             warning.setText("Otázka sa niečo musí pýtať!");
@@ -143,6 +161,10 @@ public class FXMLNewWrittenAnswerController implements Initializable, IFXMLNewQu
         return true;
     }
     
+    /**
+     * Creates an instance of WrittenAnswer from the form.
+     * @return instance of WirttenAnswer
+     */
     private Question createQuestionFromForm() {
         int choicesCount = optionsGridPane.getRowConstraints().size()-1;
         Debugger.println("choices count calculated is " + choicesCount);
@@ -161,6 +183,11 @@ public class FXMLNewWrittenAnswerController implements Initializable, IFXMLNewQu
         return q;
     }
 
+    /**
+     * Sets the data in the form from the instance.
+     * @param q instance of WrittenAnswer
+     * @param fromRow question's number in the test
+     */
     @Override
     public void setQuestion(Question q, int fromRow) {
         //we remove the default empty option

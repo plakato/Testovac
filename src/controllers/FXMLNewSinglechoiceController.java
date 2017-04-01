@@ -38,11 +38,12 @@ import main.Debugger;
  * FXML Controller class
  *
  * @author plaka
+ * Controls actions on the screen where user creates new singlechoice question.
  */
 public class FXMLNewSinglechoiceController implements Initializable, IFXMLNewQuestion {
 
     /**
-     * Initializes the controller class.
+     * Initializes the controller class. Sets row indexes of the first radio button prepared.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -68,6 +69,10 @@ public class FXMLNewSinglechoiceController implements Initializable, IFXMLNewQue
     @FXML
     private Button addQuestionButton;
     
+    /**
+     * Adds new row with an emtpy choice.
+     * @param event 
+     */
     @FXML
     private void addChoice(ActionEvent event) {
         RadioButton radio = new RadioButton();
@@ -92,6 +97,9 @@ public class FXMLNewSinglechoiceController implements Initializable, IFXMLNewQue
         
     }
     
+    /**
+     * Removes last choice from the list.
+     */
     @FXML
     private void removeChoice() {
         if (optionsGridPane.getRowConstraints().size() < 2) {
@@ -111,12 +119,18 @@ public class FXMLNewSinglechoiceController implements Initializable, IFXMLNewQue
         stage.sizeToScene();
     }
     
+    /**
+     * Closes the window without saving the question.
+     */
     @FXML
     private void closeWindow() {
         Stage stage = (Stage) optionsGridPane.getScene().getWindow();
         stage.close();
     }
     
+    /**
+     * Saves the question to the currently edited test.
+     */
     @FXML
     private void addQuestion() {
         if (!correctEntries())
@@ -127,6 +141,10 @@ public class FXMLNewSinglechoiceController implements Initializable, IFXMLNewQue
         stage.close();
     }
     
+    /**
+     * Checks whether the user entered valid data.
+     * @return true if all valid, false otherwise
+     */
     private boolean correctEntries() {
         if (questionText.getText().equals("")) {
             warning.setText("Otázka sa niečo musí pýtať!");
@@ -149,6 +167,10 @@ public class FXMLNewSinglechoiceController implements Initializable, IFXMLNewQue
         return true;
     }
     
+    /**
+     * Creates an instance of singlechoice from the form with information from the user.
+     * @return 
+     */
     private Question createQuestionFromForm() {
         int choicesCount = optionsGridPane.getRowConstraints().size()-1;
         Debugger.println("choices count calculated is " + choicesCount);
@@ -180,6 +202,11 @@ public class FXMLNewSinglechoiceController implements Initializable, IFXMLNewQue
         return q;
     }
 
+    /**
+     * Fills the form with information from the given instance.
+     * @param q instance of question
+     * @param fromRow question's number in the test
+     */
     @Override
     public void setQuestion(Question q, int fromRow) {
         //we remove the default empty option

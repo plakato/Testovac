@@ -41,7 +41,7 @@
          </content></ScrollPane>
       <HBox spacing="10.0">
          <children>
-            <SplitMenuButton mnemonicParsing="false" popupSide="RIGHT" text="Pridať otázku" style="-fx-font-size: 20;">
+            <SplitMenuButton fx:id="addQuestionMenuButton" mnemonicParsing="false" popupSide="RIGHT" onAction="#showMenu" text="Pridať otázku" style="-fx-font-size: 20;">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#addMultichoiceQuestion" text="s viac správnymi odpoveďami" style="-fx-font-size: 20;"/>
                 <MenuItem mnemonicParsing="false" onAction="#addSinglechoiceQuestion" text="s jednou správnou odpoveďou" style="-fx-font-size: 20;" />

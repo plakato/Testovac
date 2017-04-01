@@ -38,6 +38,7 @@ import main.Debugger;
  * FXML Controller class
  *
  * @author plaka
+ * Controls actions on the screen where user creates new multichoice question.
  */
 public class FXMLNewMultichoiceController implements Initializable,IFXMLNewQuestion {
 
@@ -46,7 +47,6 @@ public class FXMLNewMultichoiceController implements Initializable,IFXMLNewQuest
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     } 
     @FXML
     private GridPane optionsGridPane; 
@@ -63,6 +63,9 @@ public class FXMLNewMultichoiceController implements Initializable,IFXMLNewQuest
     @FXML
     private TextField points;
     
+    /**
+     * Creates new choice with an empty textfield to be filled by the user.
+    */
     @FXML
     private void addChoice(ActionEvent event) {
         CheckBox checkbox = new CheckBox();
@@ -86,6 +89,9 @@ public class FXMLNewMultichoiceController implements Initializable,IFXMLNewQuest
         
     }
     
+    /**
+     * Removes last choice from the choice list.
+     */
     @FXML
     private void removeChoice() {
         if (optionsGridPane.getRowConstraints().size() < 2) {
@@ -105,12 +111,19 @@ public class FXMLNewMultichoiceController implements Initializable,IFXMLNewQuest
         stage.sizeToScene();
     }
     
+    /**
+     * Closes the windows with new question without saving the question.
+     */
     @FXML
     private void closeWindow() {
         Stage stage = (Stage) optionsGridPane.getScene().getWindow();
         stage.close();
     }
     
+    /**
+     * Saves the question created by to user and adds it to
+     * the currently edited test.
+     */
     @FXML
     private void addQuestion() {
         if (!correctEntries())
@@ -121,6 +134,11 @@ public class FXMLNewMultichoiceController implements Initializable,IFXMLNewQuest
         stage.close();
     }
     
+    
+    /**
+     * Determines whether the information entered by the user are valid.
+     * @return true for all entries valid, false otherwise
+     */
     private boolean correctEntries() {
         if (questionText.getText().equals("")) {
             warning.setText("Otázka sa niečo musí pýtať!");
@@ -138,7 +156,10 @@ public class FXMLNewMultichoiceController implements Initializable,IFXMLNewQuest
         return true;
     }
 
-    
+    /**
+     * Creates an instance of Multichoice question from the form.
+     * @return instance of multichoice
+     */
     private Question createQuestionFromForm() {
         int choicesCount = optionsGridPane.getRowConstraints().size()-1;
         Debugger.println("choices count calculated is " + choicesCount);
@@ -165,6 +186,12 @@ public class FXMLNewMultichoiceController implements Initializable,IFXMLNewQuest
         return q;
     }
 
+    /**
+     * Creates form from instance of Multichoice, with all information filled
+     * as they are in the instance.
+     * @param q instance of multichoice
+     * @param fromRow number of the question in the test
+     */
     @Override
     public void setQuestion(Question q, int fromRow) {
         //we remove the default empty option

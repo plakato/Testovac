@@ -48,10 +48,18 @@ import org.apache.commons.net.ftp.FTPReply;
 /**
  *
  * @author plaka
+ * Manages different operations with test.
+ * Manages communication with the server.
  */
 public class TestManager {
+    /**
+     * Displays given test. Intended for testing and
+     * evaluating correct answers. (student mode only)
+     * @param test test to display
+     * @param stage 
+     */
      public static void displayTest(Test test, Stage stage) {
-        System.out.println(test.getName() + " - is displayed.");
+        Debugger.println(test.getName() + " - is displayed.");
         TabPane tabPane = new TabPane();
         int counter = 1;
         for (Question q : test.getQuestions()) {
@@ -94,6 +102,10 @@ public class TestManager {
         stage.show();
     }
     
+     /**
+      * Displays a screen on which teacher can create a new test.
+      * @param stage current stage
+      */
     public static void displayCreateNew(Stage stage) {
         try {
             Parent pane = FXMLLoader.load(TestManager.class.getResource("/resources/FXMLNewTest.fxml"));
@@ -105,6 +117,10 @@ public class TestManager {
         }
     }
     
+    /**
+     * Deletes all local tests, downloads tests from the server
+     * and saves all downloaded test in the local directory.
+     */
     public static void syncTestsWithServer() {
         FTPClient ftp = new FTPClient();
         boolean error = false;
@@ -138,7 +154,13 @@ public class TestManager {
         System.out.println("Got files! Count: " + files.length);
         // Delete all current test to be replaced with 
         // actulized version
-        FileUtils.cleanDirectory(new File("src/tests/"));
+        File[] locals = new File("src/tests/").listFiles();
+        for (File f : locals) {
+            if (f.getName() == "." || f.getName() == "..") {
+                continue;
+            }
+            f.delete();
+        }
         // Copy the files from server to local folder
         int failed = 0;
         for (FTPFile f : files) {
@@ -151,6 +173,7 @@ public class TestManager {
                 file.createNewFile();
                 OutputStream output = new FileOutputStream(file);
                 if (!ftp.retrieveFile(f.getName(), output)) failed++;
+                output.close();
             }
         }
         // If we failed to download some file, inform the user
@@ -186,6 +209,10 @@ public class TestManager {
         alert.close();
     }
     
+    /**
+     * Deletes all files on the server and uploads all the
+     * tests from the local directory.
+     */
     public static void syncServerWithTest() {
         FTPClient ftp = new FTPClient();
         boolean error = false;
@@ -240,6 +267,7 @@ public class TestManager {
                 File file = new File("src/tests/"+f.getName());
                 InputStream input = new FileInputStream(file);
                 if (!ftp.storeFile(f.getName(), input)) failed++;
+                input.close();
             }
         }
         // If we failed to upload some file, inform the user

@@ -45,6 +45,8 @@ import javafx.scene.paint.Color;
  * FXML Controller class
  *
  * @author plaka
+ * Manages actions taken on the sign in screen.
+ * (teacher mode only)
  */
 public class FXMLSignInController implements Initializable {
 
@@ -53,9 +55,12 @@ public class FXMLSignInController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }    
     
+    /**
+     * Goes back to the main screen.
+     * @param event 
+     */
     @FXML
     private void handleActionBack(ActionEvent event) {
         Node source = (Node)event.getSource();
@@ -78,6 +83,12 @@ public class FXMLSignInController implements Initializable {
     @FXML
     private Label warning;
     
+    /**
+     * Verifies password entered.
+     * If correct, moves to screen with the available tests.
+     * If incorrect, shows warning.
+     * @param event 
+     */
     @FXML
     private void verifyPasswordAndLoadTests(ActionEvent event) {
         if (!pass.getText().equals("heslo")) {

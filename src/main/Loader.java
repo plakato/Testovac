@@ -43,13 +43,18 @@ import javafx.scene.layout.GridPane;
 /**
  *
  * @author plaka
+ * This class manages loading of the tests.
  */
 public class Loader {
+    /**
+     * Loads all the tests from local folder.
+     * @return instance of TestSet with the tests.
+     */
     public static TestSet LoadTests() {
      TestSet tests = new TestSet();
      List<File> filesInFolder = new ArrayList<>();
-        try {
-            filesInFolder = Files.walk(Paths.get("src/tests/"))
+     try {
+      filesInFolder = Files.walk(Paths.get("src/tests/"))
                             .filter(Files::isRegularFile)
                             .map(Path::toFile)
                             .collect(Collectors.toList());
@@ -58,26 +63,36 @@ public class Loader {
      }
         
      for (File file : filesInFolder) {
+         if (file.getName() == "." || file.getName() == "..") {
+             continue;
+         }
          try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
              Test t = (Test)in.readObject();
              tests.addTest(t);
          } catch (IOException | ClassNotFoundException e) {
+             e.printStackTrace();
             ErrorInformer.exitApp();   
          }
      }
     return tests;
     }
     
+    /**
+     * Creates a layout with the tests to be displayed.
+     * @param tests tests to display
+     * @param stage current stage
+     * @return 
+     */
    public static Pane givePaneForTestSet(TestSet tests, Stage stage) {
         GridPane pane = new GridPane();
         int row = 1;
 
         for (Test t : tests.tests) {
             Label label = new Label(t.getName());
-            //label.setStyle("-fx-font-size:30;");
+            label.setStyle("-fx-font-size:20;");
             label.setPadding(new Insets(10,10,10,10));
             Button start = new Button("Začať test");
-            //start.setStyle("-fx-font-size:20;");
+            start.setStyle("-fx-font-size:20;");
             start.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {

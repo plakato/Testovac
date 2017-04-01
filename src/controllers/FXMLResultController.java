@@ -32,6 +32,8 @@ import components.TestSet;
  * FXML Controller class
  *
  * @author plaka
+ * Manages the actions taken on the screen where the result 
+ * of the test is shown. (student mode only)
  */
 public class FXMLResultController implements Initializable {
 
@@ -46,7 +48,12 @@ public class FXMLResultController implements Initializable {
     
     @FXML public Label lPoints;
     
-    
+    /**
+     * Sets the label with the amount of points received form the test.
+     * Format: points received / maximum points
+     * @param points points received
+     * @param max maximum possible amount of points
+     */
     public void setPointsLabel(double points, double max) {
         String result = "";
         if (points == (long)points) {
@@ -67,11 +74,19 @@ public class FXMLResultController implements Initializable {
         
     }
     
+    /**
+     * Exits application.
+     */
     @FXML
     private void closeApp() {
         System.exit(0);
     }
     
+    /**
+     * When the user decided to try a different test, 
+     * show the list of all the tests available.
+     * @param event 
+     */
     @FXML
     private void showTests(ActionEvent event) {
         try {

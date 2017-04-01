@@ -14,9 +14,15 @@ import javafx.stage.Stage;
 /**
  *
  * @author plaka
+ * Main class that starts the application.
  */
 public class Testy extends Application {
     
+    /**
+     * Shows main screen. Sets the basic information and dimensions.
+     * @param stage Stage on which the application runs.
+     * @throws Exception 
+     */
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/resources/FXMLMain.fxml"));

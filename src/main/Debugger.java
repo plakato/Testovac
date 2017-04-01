@@ -8,6 +8,8 @@ package main;
 /**
  *
  * @author plaka
+ * Prints debugging information to standard output.
+ * It was only used for the development of this application.
  */
 public class Debugger {
     

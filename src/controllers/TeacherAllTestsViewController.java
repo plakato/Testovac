@@ -43,10 +43,18 @@ import main.TestManager;
 /**
  *
  * @author plaka
+ * Manages actions taken on the screen with available tests.
+ * (teacher mode only)
  */
 public class TeacherAllTestsViewController {
 
     private GridPane testPane;
+    /**
+     * Loads all tests available and shows them on the screen with options to 
+     * remove or edit them. Also shows options to download questions from the server
+     * and upload to the server.
+     * @param stage 
+     */
     public void loadAndShowAllTests(Stage stage) {
     TestSet tests = Loader.LoadTests();
         Parent testPane = getPaneWithTests(tests ,stage);
@@ -76,6 +84,12 @@ public class TeacherAllTestsViewController {
         stage.show();
     }
    
+    /**
+     * Creates a layout with the available tests.
+     * @param tests
+     * @param stage
+     * @return 
+     */
     private Parent getPaneWithTests(TestSet tests,Stage stage) {
         GridPane pane = new GridPane();
         testPane = pane;
@@ -101,6 +115,10 @@ public class TeacherAllTestsViewController {
         return pane;
     }
     
+    /**
+     * Returns to the main screen.
+     * @param event 
+     */
     private void handleActionBack(ActionEvent event) {
         Node source = (Node)event.getSource();
         Stage stage = (Stage)source.getScene().getWindow();
@@ -116,40 +134,37 @@ public class TeacherAllTestsViewController {
         }
         
     }
+    /**
+     * After the user clicked button to remove test, 
+     * shows a window to confirm this action. 
+     * If action confirmed - deletes the test.
+     * If action not confirmed - does nothing.
+     * @param test Test to be deleted.
+     * @param e 
+     */
     private void deleteTest(Test test, ActionEvent e) {
-    Alert alert = new Alert(AlertType.CONFIRMATION);
-    alert.setTitle("Potvrdenie");
-    alert.setHeaderText("Odstrániť");
-    alert.setContentText("Naozaj chcete tento test odstrániť?");
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Potvrdenie");
+        alert.setHeaderText("Odstrániť");
+        alert.setContentText("Naozaj chcete tento test odstrániť?");
 
-    Optional<ButtonType> result = alert.showAndWait();
-    if (result.get() == ButtonType.OK){
-        //remove it from the window
-        int row = testPane.getRowIndex((Node)e.getSource());
-        Set<Node> toRemove = new HashSet<>();
-        for (Node node : testPane.getChildren()) {
-            int thisRow = testPane.getRowIndex(node);
-            Debugger.println("ThisRow index of " + node.getClass() + " is " + thisRow);
-            if (thisRow > row) {
-                testPane.setRowIndex(node, thisRow-1);
-                Debugger.println("thisRow of " + node.getClass() + " was set to"+ (thisRow-1));
-            }
-            if (thisRow == row) {
-                toRemove.add(node);
-                Debugger.println("object " + node.getClass() + " is removed.");
-            }
-        }
-        //testPane.getRowConstraints().remove(testPane.getRowConstraints().size() -1);
-        testPane.getChildren().removeAll(toRemove);
-        Stage stage = (Stage)testPane.getScene().getWindow();
-        stage.sizeToScene();
-        //remove it from memory
-        File file = new File("src/tests/"+test.getName()+".ser");
-        file.delete(); 
-    } else {
-    }        
-           
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            //remove it from memory
+            File file = new File("src/tests/"+test.getName()+".ser");
+            boolean success  = file.delete(); 
+            Debugger.println("File " + file.getName() + " deleted: " + success);
+            Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+            loadAndShowAllTests(stage);
+        } else {
+        }                  
     }
+    /**
+     * If the user clicked edit test, shows the screen with the list
+     * of its questions and options to edit.
+     * @param t
+     * @param stage 
+     */
     private void editTest(Test t, Stage stage) {
         Debugger.println("Editujem " + t.getName() + "...");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/FXMLNewTest.fxml"));

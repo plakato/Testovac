@@ -11,6 +11,8 @@ import javafx.scene.control.Label;
 /**
  *
  * @author plaka
+ * Interface that all new questions' editing windows
+ * must implement.
  */
 public interface IFXMLNewQuestion {
     public void setQuestion(Question q, int row);

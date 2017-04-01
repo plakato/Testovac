@@ -34,6 +34,7 @@ import java.util.Set;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.SplitMenuButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
@@ -44,6 +45,7 @@ import main.Debugger;
  * FXML Controller class
  *
  * @author plaka
+ * This class manages actions taken when the user creates/edits new test.
  */
 public class FXMLNewTestController implements Initializable {
 
@@ -66,10 +68,19 @@ public class FXMLNewTestController implements Initializable {
     @FXML
     private GridPane questionsGrid; 
     
+    /**
+     * Gives an instance of the controller that initialized this class.
+     * @return controller instance
+     */
     public static FXMLNewTestController getController() {
         return controller;
     }  
     
+    /**
+     * When editing a test, this fills the information from the
+     * previous version to the form.
+     * @param test instance of the test
+     */
     public void setThisTest(Test test) {
         previousTestName = test.getName();
         this.test.changeName(test.getName());
@@ -78,6 +89,9 @@ public class FXMLNewTestController implements Initializable {
             showQuestion(q);
         }
     }
+    /**
+     * Opens a window where user can create a new multichoice question
+     */
     @FXML
     private void addMultichoiceQuestion() {
         Stage stage = new Stage();
@@ -91,9 +105,11 @@ public class FXMLNewTestController implements Initializable {
             ErrorInformer.exitApp();
         }
     }
-        
+    /**
+     * Opens a window where user can create a new singlechoice question
+     */
     @FXML
-    private void addSinglechoiceQuestion(ActionEvent e) {
+    private void addSinglechoiceQuestion() {
         Stage stage = new Stage();
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/resources/FXMLNewSinglechoice.fxml"));
@@ -105,7 +121,9 @@ public class FXMLNewTestController implements Initializable {
             ErrorInformer.exitApp();
         }        
     }
-    
+    /**
+     * Opens a window where user can create a new written answer question
+     */
     @FXML
     private void addWrittenAnswerQuestion() {
         Stage stage = new Stage();
@@ -120,6 +138,10 @@ public class FXMLNewTestController implements Initializable {
         }      
     }  
     
+    /**
+     * Creates an instance of test from the form that the user edited.
+     * Saves it to tests folder.
+     */
     @FXML
     private void createThisTest() {
         if (name.getText().equals("")) {
@@ -145,25 +167,48 @@ public class FXMLNewTestController implements Initializable {
         //save this test
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("src/tests/"+test.getName()+".ser"))) {
             out.writeObject(test);
+            out.flush();
+            out.close();
         } catch (IOException ex) {
             ErrorInformer.failedInSavingTest();
             ex.printStackTrace();
+            return;
         }
         //show view with all tests
         Stage stage = (Stage)name.getScene().getWindow();
         TeacherAllTestsViewController ctrl  = new TeacherAllTestsViewController();
         ctrl.loadAndShowAllTests(stage);
     }
-    
+    @FXML SplitMenuButton addQuestionMenuButton;
+    /**
+     * Shows the right-sided menu when the user clicks the button
+     * instead of the arrow.
+     * @param e 
+     */
+    @FXML
+    private void showMenu(ActionEvent e) {
+        addQuestionMenuButton.show();
+    }
+    /**
+     * Checks if some test with the same name doesn't
+     * already exist.
+     * @param name name of the test
+     * @return true if test with the same name exists, false otherwise
+     */
     private boolean testWithSameName(String name) {
         for (Test t : Loader.LoadTests().tests) {
-            if (t.getName().equals(name)) {
+            if (t.getName().equalsIgnoreCase(name)) {
                 return true;
             }
         }
         return false;           
     }
     
+    /**
+     * When the test is only being edited, shows the question
+     * with the button options to edit.
+     * @param q question to show
+     */
     public void showQuestion(Question q) {
         Label text = new Label(q.question);
         text.setStyle("-fx-font-size: 20");
@@ -187,6 +232,12 @@ public class FXMLNewTestController implements Initializable {
         test.addQuestion(q);
     }
     
+    /**
+     * When user chooses to edit the question, this opens 
+     * editing window.
+     * @param e
+     * @param q question to edit
+     */
     private void editQuestion(ActionEvent e, Question q) {
         Stage stage = new Stage();
         Parent root = null;
@@ -224,6 +275,11 @@ public class FXMLNewTestController implements Initializable {
         stage.show();
     }
     
+    /**
+     * When user click the remove button, removes the
+     * question belonging to that button.
+     * @param e 
+     */
     private void removeQuestion(ActionEvent e) {
         int removedRow = questionsGrid.getRowIndex((Node)e.getSource());
         Set<Node> toRemove = new HashSet<>();
@@ -243,6 +299,12 @@ public class FXMLNewTestController implements Initializable {
         questionsGrid.getRowConstraints().remove(questionsGrid.getRowConstraints().size()-1);
     }
     
+    /**
+     * After user has edited the question, changes the old question to new one.
+     * @param oldQ old question
+     * @param newQ new question
+     * @param row row on which this question is in the test
+     */
     public void changeQuestion(Question oldQ, Question newQ, int row) {
         for (Node n : questionsGrid.getChildren()) {
             if (n instanceof Label && questionsGrid.getRowIndex(n) == row) {
