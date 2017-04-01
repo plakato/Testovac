@@ -166,12 +166,15 @@ public class FXMLNewTestController implements Initializable {
     
     public void showQuestion(Question q) {
         Label text = new Label(q.question);
+        text.setStyle("-fx-font-size: 20");
         Button edit = new Button("Editovať");
+        edit.setStyle("-fx-font-size: 20");
         Button remove = new Button("Odstrániť");
+        remove.setStyle("-fx-font-size: 20");
         edit.setOnAction(e->editQuestion(e,q));
         remove.setOnAction(e->removeQuestion(e));
         int rowNumber = questionsGrid.getRowConstraints().size();
-        questionsGrid.getRowConstraints().add(new RowConstraints(30));
+        questionsGrid.getRowConstraints().add(new RowConstraints(50));
         questionsGrid.add(text,0,rowNumber);
         questionsGrid.add(edit,1,rowNumber);
         questionsGrid.add(remove,2, rowNumber);

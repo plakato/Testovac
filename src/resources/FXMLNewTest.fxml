@@ -11,10 +11,10 @@
    <children>
       <HBox prefHeight="31.0" prefWidth="600.0" spacing="10.0">
          <children>
-            <Label text="Názov testu:" />
+            <Label text="Názov testu:" style="-fx-font-size: 20;"/>
             <VBox>
                <children>
-                  <TextField fx:id="name" prefHeight="25.0" prefWidth="502.0" />
+                  <TextField fx:id="name" prefHeight="25.0" prefWidth="502.0" style="-fx-font-size: 20;"/>
                   <Label fx:id="nameWarning" prefHeight="17.0" prefWidth="502.0" />
                </children>
             </VBox>
@@ -23,14 +23,14 @@
             <Insets />
          </VBox.margin>
       </HBox>
-      <Label text="Otázky:" />
+      <Label text="Otázky:" style="-fx-font-size: 20;"/>
       <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" VBox.vgrow="ALWAYS">
          <content>
             <GridPane fx:id="questionsGrid" hgap="10.0" vgap="5.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="ALWAYS" minWidth="20.0" percentWidth="70.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="281.0" minWidth="8.0" percentWidth="15.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="170.0" minWidth="8.0" percentWidth="15.0" />
+                <ColumnConstraints hgrow="ALWAYS" minWidth="20.0" percentWidth="60.0" />
+                <ColumnConstraints hgrow="ALWAYS" maxWidth="281.0" minWidth="8.0" percentWidth="20.0" />
+                  <ColumnConstraints hgrow="ALWAYS" maxWidth="170.0" minWidth="8.0" percentWidth="20.0" />
               </columnConstraints>
               <rowConstraints>
               </rowConstraints>
@@ -41,15 +41,15 @@
          </content></ScrollPane>
       <HBox spacing="10.0">
          <children>
-            <SplitMenuButton mnemonicParsing="false" popupSide="RIGHT" text="Pridať otázku">
+            <SplitMenuButton mnemonicParsing="false" popupSide="RIGHT" text="Pridať otázku" style="-fx-font-size: 20;">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#addMultichoiceQuestion" text="s viac správnymi odpoveďami" />
-                <MenuItem mnemonicParsing="false" onAction="#addSinglechoiceQuestion" text="s jednou správnou odpoveďou" />
-                  <MenuItem mnemonicParsing="false" onAction="#addWrittenAnswerQuestion" text="s písomnou odpoveďou" />
+                <MenuItem mnemonicParsing="false" onAction="#addMultichoiceQuestion" text="s viac správnymi odpoveďami" style="-fx-font-size: 20;"/>
+                <MenuItem mnemonicParsing="false" onAction="#addSinglechoiceQuestion" text="s jednou správnou odpoveďou" style="-fx-font-size: 20;" />
+                  <MenuItem mnemonicParsing="false" onAction="#addWrittenAnswerQuestion" text="s písomnou odpoveďou" style="-fx-font-size: 20;"/>
               </items>
             </SplitMenuButton>
             <Pane HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" onAction="#createThisTest" text="Hotovo" />
+            <Button mnemonicParsing="false" onAction="#createThisTest" style="-fx-font-size: 20;" text="Hotovo" />
          </children>
       </HBox>
    </children>

@@ -73,8 +73,10 @@ public class FXMLNewSinglechoiceController implements Initializable, IFXMLNewQue
         RadioButton radio = new RadioButton();
         radio.setToggleGroup(toggles);
         TextField field = new TextField();
+        field.setStyle("-fx-font-size: 20");
         field.setPrefWidth(530);
-        optionsGridPane.getRowConstraints().add(new RowConstraints(30));
+        radio.styleProperty().set("-fx-font-size: 20");
+        optionsGridPane.getRowConstraints().add(new RowConstraints(50));
         int buttonsIndex = optionsGridPane.getRowIndex(addRemoveButtons);
         optionsGridPane.setRowIndex(addRemoveButtons, buttonsIndex+1);
         optionsGridPane.setRowIndex(field,optionsGridPane.getRowConstraints().size()-2);
@@ -200,15 +202,17 @@ public class FXMLNewSinglechoiceController implements Initializable, IFXMLNewQue
         
         for (String s : sq.getChoices()) {
             RadioButton radio = new RadioButton();
+            radio.styleProperty().set("-fx-font-size: 20");
             radio.setToggleGroup(toggles);
             TextField field = new TextField();
+            field.setStyle("-fx-font-size: 20");
             field.setPrefWidth(530);
             field.setText(s);
             if (sq.getCorrect().equals(s)) {
                 Debugger.println("found selectd toggle");
                 toggles.selectToggle(radio);
             }
-            optionsGridPane.getRowConstraints().add(new RowConstraints(30));
+            optionsGridPane.getRowConstraints().add(new RowConstraints(50));
 
             optionsGridPane.setRowIndex(field,optionsGridPane.getRowConstraints().size()-2);
             optionsGridPane.setRowIndex(radio,optionsGridPane.getRowConstraints().size()-2);

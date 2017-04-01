@@ -12,11 +12,12 @@
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/components/WrittenAnswer.java</file>
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/controllers/FXMLSignInController.java</file>
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/components/Singlechoice.java</file>
+            <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/main/Debugger.java</file>
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/resources/FXMLMain.fxml</file>
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/components/Question.java</file>
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/controllers/FXMLNewTestController.java</file>
-            <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/components/TestSet.java</file>
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/controllers/FXMLNewWrittenAnswerController.java</file>
+            <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/components/TestSet.java</file>
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/controllers/TeacherAllTestsViewController.java</file>
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/controllers/FXMLMainController.java</file>
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/controllers/FXMLNewSinglechoiceController.java</file>
@@ -25,8 +26,8 @@
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/main/ErrorInformer.java</file>
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/controllers/FXMLNewMultichoiceController.java</file>
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/main/TestManager.java</file>
-            <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/resources/FXMLNewTest.fxml</file>
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/resources/FXMLNewMultichoice.fxml</file>
+            <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/resources/FXMLNewTest.fxml</file>
             <file>file:/C:/Users/plaka/Karlovka/2BcZS/Java/zapoctak-testy/Testy/src/resources/FXMLNewSinglechoice.fxml</file>
         </group>
     </open-files>

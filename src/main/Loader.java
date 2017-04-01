@@ -37,6 +37,8 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.GridPane;
 
 /**
  *
@@ -66,56 +68,30 @@ public class Loader {
     return tests;
     }
     
-    private static TestSet getDefaults() {
-        TestSet tests;
-
-        ArrayList<String> answers = new ArrayList<>();
-        answers.add("Lukáš");
-        answers.add("Paťka");
-        answers.add("Kačka");
-        Question q1 = new Singlechoice("Ako sa voláš?", answers, "Paťka", 1);
-        ArrayList<Boolean> correct = new ArrayList<>();
-        correct.add(true);
-        correct.add(false);
-        correct.add(true);
-        Question q2 = new Multichoice("Kto sú tvoji super kamoši?",answers,correct, 1);
-        ArrayList<String> wanswers = new ArrayList<>();
-        wanswers.add("mff");
-        wanswers.add("matfyz");
-        wanswers.add("karlovka");
-        Question q3 = new WrittenAnswer("Kde študuješ?", wanswers, 1);
-        
-        Test t1 = new Test("Jednootazkovy");
-        t1.addQuestion(q1);
-        Test t2 = new Test("Trojotazkovy");
-        t2.addQuestion(q1);
-        t2.addQuestion(q2);
-        t2.addQuestion(q3);
-        tests = new TestSet();
-        tests.addTest(t1);
-        tests.addTest(t2);
-        return tests;
-    }
-    
    public static Pane givePaneForTestSet(TestSet tests, Stage stage) {
-       VBox pane = new VBox();
-        pane.setPadding(new Insets(10,10,10,10));
-        pane.setSpacing(10);
+        GridPane pane = new GridPane();
+        int row = 1;
+
         for (Test t : tests.tests) {
             Label label = new Label(t.getName());
-            label.setStyle("-fx-font-size:30;");
+            //label.setStyle("-fx-font-size:30;");
             label.setPadding(new Insets(10,10,10,10));
             Button start = new Button("Začať test");
-            start.setStyle("-fx-font-size:20;");
+            //start.setStyle("-fx-font-size:20;");
             start.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     TestManager.displayTest(t, stage);
                 }
             });     
-            HBox hbox = new HBox(start, label);
-            pane.getChildren().add(hbox);          
+            pane.add(start, 0, row);
+            pane.add(label, 1, row);
+            row++;
         }
+        pane.setPadding(new Insets(10,10,10,10));
+        pane.setVgap(10);
+        pane.setHgap(10);
+        pane.setBorder(Border.EMPTY);
         return pane;
    }
     

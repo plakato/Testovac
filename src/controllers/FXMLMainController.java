@@ -6,7 +6,6 @@
 package controllers;
 
 import java.awt.Font;
-import javafx.geometry.Insets;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,6 +28,9 @@ import main.Debugger;
 import main.ErrorInformer;
 import components.Test;
 import components.TestSet;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.layout.Priority;
 import main.Loader;
 import main.TestManager;
 
@@ -38,6 +40,11 @@ import main.TestManager;
  */
 public class FXMLMainController implements Initializable {
      
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }  
+    
     @FXML
     private void handleButtonActionTeacher(ActionEvent event) throws IOException {
         Debugger.println("You clicked teacher!");  
@@ -55,15 +62,28 @@ public class FXMLMainController implements Initializable {
         Debugger.println("You clicked student!");    
         Node source =(Node) event.getSource();
         Stage stage =(Stage) source.getScene().getWindow();
-        
+        displayTests(stage);       
+    }
+    
+    public void displayTests(Stage stage) {
         //We dynamically create next layout with the list of all tests available
         TestSet tests = Loader.LoadTests();
         Pane pane = Loader.givePaneForTestSet(tests, stage);
         Button back = new Button("Späť");
-        back.setStyle("-fx-font-size:20;");
+        back.setStyle("-fx-font-size: 20");
         back.setOnAction(this::handleActionBackToStart);
-        pane.getChildren().add(back);
-        Scene scene = new Scene(new ScrollPane(pane)); 
+        Pane spacer = new Pane();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        Button download = new Button("Stiahnuť zo servru");
+        download.setStyle("-fx-font-size: 20");
+        download.setOnAction(e -> {TestManager.syncTestsWithServer(); displayTests(stage);});
+        HBox footer = new HBox(back, spacer, download);
+        footer.setSpacing(10);
+        footer.setAlignment(Pos.BOTTOM_CENTER);
+        VBox mainPane = new VBox(new ScrollPane(pane), footer);
+        mainPane.setPadding(new Insets(10,10,10,10));
+        mainPane.setSpacing(10);
+        Scene scene = new Scene(mainPane); 
         stage.setScene(scene);
         stage.show();
     }
@@ -81,12 +101,7 @@ public class FXMLMainController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    }
-    
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    }  
     
    
 }

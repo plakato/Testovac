@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * 
  */
 package components;
 
@@ -23,13 +21,22 @@ import main.Debugger;
 /**
  *
  * @author plaka
+ * This class describes a multichoice question object for test.
  */
+
 public class Multichoice extends Question {
     private List<String> choices;
     private List<Boolean> correct;
     private List<Boolean> selected;
     private double points;
-    
+    /** 
+     * Constructor
+     * @param question The text of the question - what is being asked.
+     * @param choices List of all possible choices to choose from.
+     * @param correct List in the same order as choices - determines
+     *  which choice is correct using boolean value.
+     * @param points Maximum amount of points possible to receive in this question.
+     */
     public Multichoice(String question, List<String> choices, List<Boolean> correct, double points) {
         this.question = question;
         this.choices = choices;
@@ -37,7 +44,8 @@ public class Multichoice extends Question {
         this.points = points;
         selected = new ArrayList<Boolean>(Collections.nCopies(choices.size(), Boolean.FALSE));
     }
-    
+
+    @Override
     public List<String> getChoices() {
         return choices;
     }
@@ -46,16 +54,18 @@ public class Multichoice extends Question {
     public Pane getPaneOfChoices() {
         VBox vbox = new VBox();
         for (String choice : choices) {
-            CheckBox checkbox = new CheckBox();            
+            CheckBox checkbox = new CheckBox();  
+            checkbox.setStyle("-fx-font-size: 20");
             checkbox.selectedProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                    System.out.println("New value is "+ newValue);
-                    System.out.println("The size of the selected array is: " + selected.size());
+                    Debugger.println("New value is "+ newValue);
+                    Debugger.println("The size of the selected array is: " + selected.size());
                     selected.set(choices.indexOf(choice),newValue);
                 }               
             });
             Label label = new Label(choice);
+            label.setStyle("-fx-font-size: 20");
             HBox hbox = new HBox(checkbox, label);
             vbox.getChildren().add(hbox);
         }
@@ -66,10 +76,11 @@ public class Multichoice extends Question {
     public double getScore() {
         Debugger.println("Selected are: ");
         double result = 0;
+        double pointsPerOne = points / choices.size();
         for (int i = 0; i < choices.size(); i++) {
             Debugger.println(choices.get(i) + ": " + selected.get(i));
             if (correct.get(i) == selected.get(i)) {
-                result += points;
+                result += pointsPerOne;
             }
         }
         
@@ -80,6 +91,11 @@ public class Multichoice extends Question {
     public double getPoints() {
         return points;
     }
+    
+    /**
+     * Gives the list indicating which answers are correct
+     * @return list of indicators
+     */
     public List<Boolean> getCorrect() {
         return correct;
     }

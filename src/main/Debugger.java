@@ -12,6 +12,6 @@ package main;
 public class Debugger {
     
     public static void println(String s) {
-        System.out.println(s);
+        //System.out.println(s);
     }
 }

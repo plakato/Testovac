@@ -25,6 +25,9 @@ public class Testy extends Application {
         
         stage.setTitle("Testovač");
         stage.setScene(scene);
+        stage.setWidth(800);
+        stage.setHeight(800);
+        stage.centerOnScreen();
         stage.show();
     }
 

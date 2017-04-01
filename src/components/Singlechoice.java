@@ -21,6 +21,7 @@ import main.Debugger;
 /**
  *
  * @author plaka
+ * This class describes a singlechoice question object for test.
  */
 public class Singlechoice extends Question {
     private List<String> choices;
@@ -28,16 +29,29 @@ public class Singlechoice extends Question {
     private String selected = "";
     private double points;
     
+    /**
+     * Constructor.
+     * @param question text of the question
+     * @param choices list of all possible choices
+     * @param correct correct answer
+     * @param points maximum points to receive for this question
+     */
     public Singlechoice(String question, List<String> choices, String correct, double points) {
         this.question = question;
         this.choices = choices;
         this.correct = correct;
         this.points = points;
     }
+    
+    @Override
     public List<String> getChoices() {
         return choices;
     }
     
+    /**
+     * Gives the correct answer.
+     * @return correct answer
+     */
     public String getCorrect() {
         return correct;
     }
@@ -53,6 +67,7 @@ public class Singlechoice extends Question {
         ToggleGroup group = new ToggleGroup();
         for (String choice : choices) {
             RadioButton rb = new RadioButton(choice);
+            rb.setStyle("-fx-font-size: 20");
             rb.setToggleGroup(group);
             HBox hbox = new HBox(rb);
             vbox.getChildren().add(hbox);

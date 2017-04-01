@@ -24,4 +24,11 @@ public class ErrorInformer {
                     alert.showAndWait();
                     alert.close();
     }
+    
+    public static void failedSyncing() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("Nepodarilo sa synchronizovať testy so servrom.");
+                    alert.showAndWait();
+                    alert.close();
+    }
 }

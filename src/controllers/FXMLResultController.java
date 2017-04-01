@@ -47,13 +47,23 @@ public class FXMLResultController implements Initializable {
     @FXML public Label lPoints;
     
     
-    public void setPointsLabel(double points) {
+    public void setPointsLabel(double points, double max) {
+        String result = "";
         if (points == (long)points) {
-            lPoints.setText(String.format("%d",(long) points));
+            result = String.format("%d",(long) points);
         }
         else {
-            lPoints.setText(String.format("%s", points));
+            result = String.format("%s", points);
         }
+        result += "/";
+        
+        if (max == (long)max) {
+            result += String.format("%d",(long) max);
+        }
+        else {
+            result += String.format("%s", max);
+        }
+        lPoints.setText(result);
         
     }
     
@@ -64,28 +74,14 @@ public class FXMLResultController implements Initializable {
     
     @FXML
     private void showTests(ActionEvent event) {
-        TestSet tests = Loader.LoadTests();
-        Node source =  (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        Pane pane = Loader.givePaneForTestSet(tests, stage);
-        Scene scene = new Scene(new ScrollPane(pane));
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/FXMLMain.fxml"));
+            loader.load();
+            FXMLMainController ctrl = loader.getController();
+            ctrl.displayTests((Stage)lPoints.getScene().getWindow());
+        } catch (IOException e) {
+            ErrorInformer.exitApp();
+        }
         
-        Button back = new Button("Späť");
-        back.setStyle("-fx-font-size:20;");
-        back.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("/resources/FXMLMain.fxml"));
-                    stage.setScene(new Scene(root));
-                    stage.show();
-                } catch (IOException e) {
-                    ErrorInformer.exitApp();
-                }
-            }
-        }) ;
-        pane.getChildren().add(back);
-        stage.setScene(scene);
-        stage.show();
     }
 }

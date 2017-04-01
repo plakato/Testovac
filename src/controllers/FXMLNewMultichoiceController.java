@@ -66,9 +66,11 @@ public class FXMLNewMultichoiceController implements Initializable,IFXMLNewQuest
     @FXML
     private void addChoice(ActionEvent event) {
         CheckBox checkbox = new CheckBox();
+        checkbox.styleProperty().set("-fx-font-size: 20");
         TextField field = new TextField();
+        field.setStyle("-fx-font-size: 20");
         field.setPrefWidth(530);
-        optionsGridPane.getRowConstraints().add(new RowConstraints(30));
+        optionsGridPane.getRowConstraints().add(new RowConstraints(50));
         int buttonsIndex = optionsGridPane.getRowIndex(addRemoveButtons);
         optionsGridPane.setRowIndex(addRemoveButtons, buttonsIndex+1);
         optionsGridPane.setRowIndex(field,optionsGridPane.getRowConstraints().size()-2);
@@ -182,17 +184,18 @@ public class FXMLNewMultichoiceController implements Initializable,IFXMLNewQuest
             points.setText(String.format("%d",(long)mqPoints));
         else
             points.setText(String.format("%s",mqPoints));
-        points.setText(Double.toString(mq.getPoints()));
         Debugger.println("choices count is "+ mq.getChoices().size());
                 Debugger.println("row contraints count is "+ optionsGridPane.getRowConstraints().size());
 
         for (String s : mq.getChoices()) {
             CheckBox checkbox = new CheckBox();
             TextField field = new TextField();
+            field.setStyle("-fx-font-size: 20;");
             field.setPrefWidth(530);
             field.setText(s);
             checkbox.setSelected(mq.getCorrect().get(mq.getChoices().indexOf(s)));
-            optionsGridPane.getRowConstraints().add(new RowConstraints(30));
+            checkbox.styleProperty().set("-fx-font-size: 20");
+            optionsGridPane.getRowConstraints().add(new RowConstraints(50));
 
             optionsGridPane.setRowIndex(field,optionsGridPane.getRowConstraints().size()-2);
             optionsGridPane.setRowIndex(checkbox,optionsGridPane.getRowConstraints().size()-2);

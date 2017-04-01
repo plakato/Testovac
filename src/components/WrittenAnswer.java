@@ -16,12 +16,19 @@ import main.Debugger;
 /**
  *
  * @author plaka
+ * This class describes a question with written answer for test.
  */
 public class WrittenAnswer extends Question {
     private List<String> possibleAnswers;
     private String writtenAnswer = "";
     private double points;
     
+    /**
+     * Constructor
+     * @param question test of the question
+     * @param possibleAnswers all version of the correct answer
+     * @param points maximum points
+     */
     public WrittenAnswer(String question, List<String> possibleAnswers, double points) {
         this.question = question;
         this.possibleAnswers = possibleAnswers;
@@ -32,6 +39,7 @@ public class WrittenAnswer extends Question {
     public Pane getPaneOfChoices() {
         Pane pane = new Pane();
         TextField field = new TextField();
+        field.setStyle("-fx-font-size: 20");
         field.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -63,6 +71,10 @@ public class WrittenAnswer extends Question {
         return points;
     }
     
+    /**
+     * Gives all the correct answers.
+     * @return anweres
+     */
     public List<String> getChoices() {
         return possibleAnswers;
     } 

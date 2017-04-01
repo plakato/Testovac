@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -7,12 +8,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FXMLResultController">
+<VBox alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FXMLResultController">
    <children>
-      <Label layoutX="234.0" layoutY="42.0" text="Získal/a si ">
+      <Label alignment="CENTER" layoutX="234.0" layoutY="42.0" text="Získal/a si" textAlignment="CENTER" VBox.vgrow="ALWAYS">
          <font>
             <Font size="28.0" />
          </font>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
       </Label>
       <Label fx:id="lPoints" alignment="CENTER" contentDisplay="CENTER" layoutX="196.0" layoutY="109.0" prefHeight="73.0" prefWidth="206.0" text="0">
          <font>
@@ -24,15 +28,28 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <Button alignment="BOTTOM_LEFT" layoutX="42.0" layoutY="328.0" mnemonicParsing="false" onAction="#showTests" prefHeight="40.0" prefWidth="86.0" text="Iný test">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button layoutX="480.0" layoutY="329.0" mnemonicParsing="false" onAction="#closeApp" text="Ukončiť">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
+      <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#closeApp" text="Ukončiť">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#showTests" prefHeight="40.0" prefWidth="86.0" text="Iný test">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </HBox>
    </children>
-</Pane>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>

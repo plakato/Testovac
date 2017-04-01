@@ -11,36 +11,36 @@
    <children>
       <HBox spacing="10.0">
          <children>
-            <Label text="Znenie otázky:" />
+            <Label text="Znenie otázky:" style="-fx-font-size: 20;" />
             <VBox>
                <children>
-                  <TextArea fx:id="questionText" prefHeight="50.0" prefWidth="500.0" />
-                  <Label fx:id="warning" prefWidth="500.0" />
+                  <TextArea fx:id="questionText" prefHeight="50.0" prefWidth="500.0" style="-fx-font-size: 20;"/>
+                  <Label fx:id="warning" prefWidth="500.0" style="-fx-font-size: 20;" />
                </children>
             </VBox>
          </children>
       </HBox>
       <HBox spacing="10.0">
          <children>
-            <Label text="Počet bodov:" />
-            <TextField fx:id="points" text="1" HBox.hgrow="ALWAYS" />
+            <Label text="Počet bodov:" style="-fx-font-size: 20;"/>
+            <TextField fx:id="points" text="1" HBox.hgrow="ALWAYS" style="-fx-font-size: 20;"/>
          </children>
       </HBox>
-      <Label text="Správne odpovede:" />
+      <Label text="Správne odpovede:" style="-fx-font-size: 20;"/>
       <GridPane fx:id="optionsGridPane" prefHeight="60.0" prefWidth="521.0" VBox.vgrow="ALWAYS">
         <columnConstraints>
           <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="550.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="50.0" prefHeight="70.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="50.0" prefHeight="70.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" />
+            <TextField GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" style="-fx-font-size: 20;" />
             <HBox fx:id="addRemoveButtons" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.rowIndex="1">
                <children>
-                  <Button fx:id="addChoiceButton" mnemonicParsing="false" onAction="#addChoice" text="Pridaj možnosť" />
-                  <Button fx:id="removeOption" mnemonicParsing="false" onAction="#removeChoice" text="Odober možnosť" />
+                  <Button fx:id="addChoiceButton" mnemonicParsing="false" onAction="#addChoice" style="-fx-font-size: 20;" text="Pridaj možnosť" />
+                  <Button fx:id="removeOption" mnemonicParsing="false" onAction="#removeChoice" style="-fx-font-size: 20;" text="Odober možnosť" />
                </children>
             </HBox>
          </children>
@@ -53,9 +53,9 @@
       </GridPane>
       <HBox>
          <children>
-            <Button mnemonicParsing="false" onAction="#closeWindow" text="Zrušiť" />
+            <Button mnemonicParsing="false" onAction="#closeWindow" style="-fx-font-size: 20;" text="Zrušiť" />
             <Pane HBox.hgrow="ALWAYS" />
-            <Button fx:id="addQuestionButton" mnemonicParsing="false" onAction="#addQuestion" text="Pridať" />
+            <Button fx:id="addQuestionButton" mnemonicParsing="false" style="-fx-font-size: 20;" onAction="#addQuestion" text="Pridať" />
          </children>
       </HBox>
    </children>

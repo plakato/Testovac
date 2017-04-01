@@ -18,6 +18,7 @@ import java.util.Set;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -51,14 +52,21 @@ public class TeacherAllTestsViewController {
         Parent testPane = getPaneWithTests(tests ,stage);
 
         Button back = new Button("Späť");
+        back.setStyle("-fx-font-size: 20");
         back.setOnAction(e -> handleActionBack(e));
-        Pane spacer = new Pane();
-        HBox.setHgrow(spacer, Priority.ALWAYS);
         Button createNew = new Button("Vytvoriť nový");
+        createNew.setStyle("-fx-font-size: 20");
         createNew.setOnAction(e -> TestManager.displayCreateNew(stage));
+        Button download = new Button("Stiahnuť zo servru");
+        download.setStyle("-fx-font-size: 20");
+        download.setOnAction(e -> {TestManager.syncTestsWithServer(); loadAndShowAllTests(stage);});
+        Button upload = new Button("Uložiť na server");
+        upload.setStyle("-fx-font-size: 20");
+        upload.setOnAction(e -> {TestManager.syncServerWithTest(); loadAndShowAllTests(stage);});
 
-        HBox footer = new HBox(back, spacer, createNew);
+        HBox footer = new HBox(back, createNew, download, upload);
         footer.setSpacing(10);
+        footer.setAlignment(Pos.BOTTOM_CENTER);
 
         VBox pane = new VBox(new ScrollPane(testPane), footer);
         pane.setSpacing(10);
@@ -74,8 +82,11 @@ public class TeacherAllTestsViewController {
         int row = 1;
         for (Test test : tests.tests) {
             Label name = new Label(test.getName());
+            name.setStyle("-fx-font-size: 20");
             Button edit = new Button("Editovať");
+            edit.setStyle("-fx-font-size: 20");
             Button delete = new Button("Odstrániť");
+            delete.setStyle("-fx-font-size: 20");
             edit.setOnAction(e -> editTest(test, stage));
             delete.setOnAction(e -> deleteTest(test, e));
             pane.add(name, 0, row);

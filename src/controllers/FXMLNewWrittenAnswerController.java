@@ -68,8 +68,10 @@ public class FXMLNewWrittenAnswerController implements Initializable, IFXMLNewQu
     @FXML
     private void addChoice(ActionEvent event) {
         TextField field = new TextField();
+        field.setStyle("-fx-font-size: 20");
         field.setPrefWidth(530);
-        optionsGridPane.getRowConstraints().add(new RowConstraints(30));
+        field.styleProperty().set("-fx-font-size: 20");
+        optionsGridPane.getRowConstraints().add(new RowConstraints(50));
         int buttonsIndex = optionsGridPane.getRowIndex(addRemoveButtons);
         optionsGridPane.setRowIndex(addRemoveButtons, buttonsIndex+1);
         optionsGridPane.setRowIndex(field,optionsGridPane.getRowConstraints().size()-2);        
@@ -181,9 +183,10 @@ public class FXMLNewWrittenAnswerController implements Initializable, IFXMLNewQu
         
         for (String s : wa.getChoices()) {
             TextField field = new TextField();
+            field.styleProperty().set("-fx-font-size: 20");
             field.setPrefWidth(530);
             field.setText(s);
-            optionsGridPane.getRowConstraints().add(new RowConstraints(30));
+            optionsGridPane.getRowConstraints().add(new RowConstraints(50));
             optionsGridPane.setRowIndex(field,optionsGridPane.getRowConstraints().size()-2);
             optionsGridPane.add(field,0,optionsGridPane.getRowConstraints().size()-2);
         }
