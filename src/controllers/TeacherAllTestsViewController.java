@@ -162,7 +162,7 @@ public class TeacherAllTestsViewController {
     /**
      * If the user clicked edit test, shows the screen with the list
      * of its questions and options to edit.
-     * @param t
+     * @param t test to edit
      * @param stage 
      */
     private void editTest(Test t, Stage stage) {

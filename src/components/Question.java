@@ -16,7 +16,9 @@ import javafx.scene.layout.Pane;
  * must implement.
  */
 public abstract class Question implements Serializable {
-  /**
+  	public static final long serialVersionUID = 296646684679228885L;
+
+    /**
    * The text of the question.
    */
     public String question;

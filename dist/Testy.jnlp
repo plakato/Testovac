@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Testy.jar" size="66665" download="eager" />
+    <jar href="Testy.jar" size="64649" download="eager" />
     <jar href="lib\commons-io-2.5.jar" size="208696" download="eager" />
     <jar href="lib\commons-net-3.6.jar" size="307410" download="eager" />
   </resources>

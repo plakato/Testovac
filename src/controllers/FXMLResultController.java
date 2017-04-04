@@ -60,7 +60,7 @@ public class FXMLResultController implements Initializable {
             result = String.format("%d",(long) points);
         }
         else {
-            result = String.format("%s", points);
+            result = String.format("%.2f", points);
         }
         result += "/";
         
@@ -68,7 +68,7 @@ public class FXMLResultController implements Initializable {
             result += String.format("%d",(long) max);
         }
         else {
-            result += String.format("%s", max);
+            result += String.format("%.2f", max);
         }
         lPoints.setText(result);
         

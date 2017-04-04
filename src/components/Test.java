@@ -24,6 +24,7 @@ import java.io.Serializable;
  * This class represents test. A test is composed of object implementing Question interface.
  */
 public class Test implements Serializable {
+    private static final long serialVersionUID = -1291138476285029378L;
     private String name;
     private ArrayList<Question> questions;
     private double totalMaxPoints;
